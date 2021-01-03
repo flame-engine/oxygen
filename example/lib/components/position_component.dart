@@ -23,5 +23,4 @@ class PositionComponent extends Component<PositionInit> {
   void reset() {
     x = y = null;
   }
-
 }
