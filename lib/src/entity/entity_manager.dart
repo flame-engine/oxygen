@@ -57,7 +57,7 @@ class EntityManager {
 
     final componentPool = world.componentManager.getComponentPool(T);
     final component = componentPool.acquire(data);
-    
+
     assert(
       data == null || data.runtimeType == component.initType,
       'Component $T expects an InitObject of type ${component.initType} but received ${data.runtimeType}',

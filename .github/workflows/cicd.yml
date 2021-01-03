@@ -29,7 +29,7 @@ jobs:
           java-version: '12.x'
       - uses: subosito/flutter-action@v1
       - run: flutter analyze --pub
-      - run: flutter format -l 240 -n . --set-exit-if-changed
+      - run: flutter format -n . --set-exit-if-changed
   # END LINTING STAGE
 
   # BEGIN TESTING STAGE
