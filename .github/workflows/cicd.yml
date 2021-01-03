@@ -43,7 +43,6 @@ jobs:
           java-version: '12.x'
       - uses: subosito/flutter-action@v1
       - run: flutter test --coverage --pub test
-      - run: lcov --list ./coverage/lcov.info
   
   benchmark:
     needs: [test]
