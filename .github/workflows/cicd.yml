@@ -1,0 +1,59 @@
+name: cicd
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [opened, reopened, synchronize]
+
+jobs:
+  # BEGIN LINTING STAGE
+  dartdoc: 
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '12.x'
+      - uses: subosito/flutter-action@v1
+      - run: flutter pub get
+      - run: dartdoc --no-auto-include-dependencies --quiet
+      
+  lint: 
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '12.x'
+      - uses: subosito/flutter-action@v1
+      - run: flutter analyze --pub
+      - run: flutter format -l 240 -n . --set-exit-if-changed
+  # END LINTING STAGE
+
+  # BEGIN TESTING STAGE
+  test:
+    needs: [dartdoc, lint]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '12.x'
+      - uses: subosito/flutter-action@v1
+      - run: flutter test --coverage --pub test
+      - run: lcov --list ./coverage/lcov.info
+  
+  benchmark:
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-java@v1
+        with:
+          java-version: '12.x'
+      - uses: subosito/flutter-action@v1
+      - run: flutter pub get
+      - run: dart pub run benchmark
+  # END TESTING STAGE

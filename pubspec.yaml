@@ -1,0 +1,15 @@
+name: oxygen
+description: A lightweight Entity Component System written in Dart
+version: 0.0.1
+homepage: https://github.com/flame-engine/oxygen
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  meta: ^1.2.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  benchmark: ^0.2.0
