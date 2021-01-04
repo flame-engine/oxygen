@@ -12,4 +12,4 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  benchmark: ^0.2.0
+  benchmark: ^0.2.1

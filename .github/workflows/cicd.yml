@@ -54,5 +54,5 @@ jobs:
           java-version: '12.x'
       - uses: subosito/flutter-action@v1
       - run: flutter pub get
-      - run: dart pub run benchmark
+      - run: flutter pub run benchmark
   # END TESTING STAGE
