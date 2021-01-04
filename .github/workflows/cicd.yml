@@ -13,23 +13,25 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: actions/setup-java@v1
-        with:
-          java-version: '12.x'
-      - uses: subosito/flutter-action@v1
-      - run: flutter pub get
+      - uses: cedx/setup-dart@v2
+      - run: pub get
       - run: dartdoc --no-auto-include-dependencies --quiet
       
-  lint: 
+  format: 
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: actions/setup-java@v1
-        with:
-          java-version: '12.x'
-      - uses: subosito/flutter-action@v1
-      - run: flutter analyze --pub
-      - run: flutter format -n . --set-exit-if-changed
+      - uses: cedx/setup-dart@v2
+      - run: |
+        [ -z "$(dart format . | grep "(0 changed)")" ] && exit 1 || exit 0
+
+  analyze: 
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: cedx/setup-dart@v2
+      - run: pub get
+      - run: dart analyze
   # END LINTING STAGE
 
   # BEGIN TESTING STAGE
@@ -38,21 +40,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: actions/setup-java@v1
-        with:
-          java-version: '12.x'
-      - uses: subosito/flutter-action@v1
-      - run: flutter test --coverage --pub test
+      - uses: cedx/setup-dart@v2
+      - run: pub get
+      - run: dart pub run test
   
   benchmark:
     needs: [test]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
-      - uses: actions/setup-java@v1
-        with:
-          java-version: '12.x'
-      - uses: subosito/flutter-action@v1
-      - run: dart pub get
-      - run: dart pub run benchmark
+      - uses: cedx/setup-dart@v2
+      - run: pub get
+      - run: pub run benchmark
   # END TESTING STAGE
