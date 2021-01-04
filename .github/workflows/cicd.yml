@@ -42,7 +42,7 @@ jobs:
       - uses: actions/checkout@v1
       - uses: cedx/setup-dart@v2
       - run: pub get
-      - run: dart pub run test
+      - run: dart test
   
   benchmark:
     needs: [test]
