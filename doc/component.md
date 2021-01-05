@@ -63,7 +63,7 @@ void main() {
 
 ## Registering a Component
 
-When you want to create a Entity with certain components in a World, you first have to let your World know which components there are. You do that by registering it using a `builder` closure:
+When you want to create an Entity with certain components in a World, you first have to let your World know which components there are. You do that by registering it using a `builder` closure:
 ```dart
 world.registerComponent(() => YourComponent());
 ```
