@@ -1,13 +1,13 @@
 # World
 
-A World is a container for Entities, Components and Systems. So a World is quite important for the ECS, but you are not restricted to a single world. You can have multiple worlds running at the same time, or just a few and switch certain worlds off and on depending on your gameplay:
+A World is a container for Entities, Components and Systems (ECS). So a World is quite important for the ECS, but you are not restricted to a single world. You can have multiple worlds running at the same time, or just a few and switch certain worlds off and on depending on your gameplay:
 ```dart
 final world = World();
 ```
 
 ## Registering a Component
 
-When you want to create a Entity with certain Components in a World, you first have to let your World know which components there are. You do that by registering it using a `builder` closure:
+When you want to create a Entity with certain components in a World, you first have to let your World know which components there are. You do that by registering it using a `builder` closure:
 ```dart
 world.registerComponent(() => YourComponent());
 ```
@@ -41,9 +41,9 @@ This will initialize all the systems and make sure everything is in place.
 
 ## Executing
 
-Now we can execute the world:
+Now we can execute the world by passing the delta since the last execution time:
 ```dart
-world.execute();
+world.execute(delta);
 ```
 
-This will run everything in the world once.
+This will run everything in the world once. You would normally call this somewhere in your game loop.

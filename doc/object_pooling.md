@@ -7,7 +7,7 @@ In this implementation the object pool works as explained above, and it is able 
 There is currently no [high water mark](https://en.wikipedia.org/wiki/High_water_mark) in place, so the pool will grow indefinitely.
 
 ## Component Pooling
-Each Component has it's own object pool, we do this to ensure there is no overhead of creating new instances. This is especially useful when your game is constantly adding and remove Components to Entities. It also ensures the garabage collector won't have to be called quite often, ensuring a better performace(this is especially true for the web).
+Each Component has it's own object pool, we do this to ensure there is no overhead of creating new instances. This is especially useful when your game is constantly adding and remove components to entities. It also ensures the garabage collector won't have to be called quite often, ensuring a better performace(this is especially true for the web).
 
 So whenever a Component is added to an Entity:
 ```dart
