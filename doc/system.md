@@ -29,7 +29,7 @@ class YourSystem extends System {
   @override
   void execute(double delta) { 
     query.entities.forEach((entity) {
-      final yourComponent = entity.getComponent<YourComponent>();
+      final yourComponent = entity.get<YourComponent>();
     });
   }
 }

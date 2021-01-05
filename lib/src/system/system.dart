@@ -14,5 +14,5 @@ abstract class System {
   Query createQuery(Iterable<Filter> filters) =>
       world.entityManager._queryManager.createQuery(filters);
 
-  void execute();
+  void execute(double delta);
 }

@@ -15,14 +15,14 @@ class SystemManager {
 
   void registerSystem<T extends System>(T system) {
     assert(system.world == null, '$T is already registered');
-    system.world = this.world;
+    system.world = world;
     _systems.add(system);
     _systems.sort((a, b) => a.priority - b.priority);
   }
 
-  void _execute() {
+  void _execute(double delta) {
     for (final system in _systems) {
-      system.execute();
+      system.execute(delta);
     }
   }
 }

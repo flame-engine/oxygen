@@ -15,19 +15,19 @@ class Entity extends PoolObject<String> {
 
   Entity(this._entityManager) : id = _entityManager._nextEntityId++;
 
-  T getComponent<T extends Component>() {
+  T get<T extends Component>() {
     assert(T != Component, 'An implemented Component was expected');
     return _components[T];
   }
 
-  bool hasComponent<T extends Component>() => _componentTypes.contains(T);
+  bool has<T extends Component>() => _componentTypes.contains(T);
 
-  void addComponent<T extends Component>([InitObject data]) {
+  void add<T extends Component>([InitObject data]) {
     assert(T != Component, 'An implemented Component was expected');
     _entityManager.addComponentToEntity<T>(this, data);
   }
 
-  void removeComponent<T extends Component>() {
+  void remove<T extends Component>() {
     assert(T != Component, 'An implemented Component was expected');
     _entityManager.removeComponentFromEntity<T>(this);
   }

@@ -38,8 +38,8 @@ class World {
 
   Entity createEntity([String name]) => entityManager.createEntity(name);
 
-  void execute() {
-    systemManager._execute();
+  void execute(double delta) {
+    systemManager._execute(delta);
     entityManager.processRemovedEntities();
   }
 }

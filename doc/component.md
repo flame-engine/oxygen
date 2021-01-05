@@ -17,10 +17,10 @@ class YourComponent extends Component {
 }
 
 void main() {
-  ...
+  // ...
   final yourEntity = world.createEntity()
-    ..addComponent<YourComponent>();
-  ...
+    ..add<YourComponent>();
+  // ...
 }
 ```
 > Components are part of their own object pool, and each instance will be acquired and released from that pool when needed. The `init` will be called on acquire, and the `reset` on release. Therefore components do not use constructors. See [Object Pooling](./object_pooling.md) for more information.
@@ -54,9 +54,9 @@ class YourComponent extends Component<YourInit> {
 }
 
 void main() {
-  ...
+  // ...
   final yourEntity = world.createEntity()
-    ..addComponent<YourComponent>(YourInit(yourProperty: 10));
-  ...
+    ..add<YourComponent>(YourInit(yourProperty: 10));
+  // ...
 }
 ```
