@@ -1,0 +1,19 @@
+dartdoc:
+    include: ['oxygen']
+    errors:
+      - ambiguous-doc-reference
+      - ambiguous-reexport
+      - broken-link
+      - category-order-gives-missing-package-name
+      - deprecated
+      - ignored-canonical-for
+      - missing-from-search-index
+      - no-canonical-found
+      - no-library-level-docs
+      - not-implemented
+      - orphaned-file
+      - reexported
+      - private-api-across-packages
+      - unknown-file
+      - unknown-macro
+      - unresolved-doc-reference
