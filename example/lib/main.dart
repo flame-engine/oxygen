@@ -48,5 +48,6 @@ void main(List<String> arguments) {
     sleep(Duration(milliseconds: FRAME_TIME));
     run();
   }
+
   run();
 }
