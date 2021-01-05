@@ -11,3 +11,12 @@
   <img src="https://github.com/flame-engine/oxygen/workflows/cicd/badge.svg?branch=master&event=push" alt="cicd" />
   <a title="Dependencies" href="https://github.com/flame-engine/oxygen/blob/master/pubspec.yaml"><img src="https://img.shields.io/librariesio/release/pub/oxygen?label=dependencies"></a>
 </p>
+
+## Documentation
+See the [documentation](https://github.com/flame-engine/oxygen/blob/master/doc) for more information.
+
+## Contributing
+For contributing see our [Contributing guidelines](https://github.com/flame-engine/oxygen/blob/master/CONTRIBUTING.md).
+
+## Credits
+- Inspired by [ECSY](https://ecsy.io/)
