@@ -25,7 +25,7 @@ A query will always be updated with entities that match the filters. So whenever
 
 Queries are able to use filters to define how the entities should be matched.
 
-## Has<Component> filter
+### Has<Component> filter
 
 This filter checks if an entity has the given component:
 ```dart
@@ -37,7 +37,7 @@ final query = createQuery([
 // query.entities will contain all the entities that have both YourComponentA and YourComponentB.
 ```
 
-## HasNot<Component> filter
+### HasNot<Component> filter
 
 This filter checks if an entity does **not** have the given component:
 ```dart

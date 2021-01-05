@@ -1,7 +1,7 @@
 part of oxygen;
 
 /// A Query is a way to retrieve entities by matching their components against the Query filters.
-/// 
+///
 /// They are used by systems to retrieve the entities they care about.
 class Query {
   /// The manager that handles all the entities.
