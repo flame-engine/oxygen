@@ -1,9 +1,15 @@
 part of oxygen;
 
+/// Manages all the queries to ensure we don't duplicate lists.
 class QueryManager {
+  /// The manager that handles all the entities.
   final EntityManager entityManager;
 
-  Map<String, Query> _queries = {};
+  /// Cache of all the created queries.
+  ///
+  /// If a new [Query] is requested then [_createKey] is used to check
+  /// if we already have the requested query in cache and return that one instead.
+  final Map<String, Query> _queries = {};
 
   QueryManager(this.entityManager);
 
@@ -37,6 +43,7 @@ class QueryManager {
     }
   }
 
+  /// Creates unique key to identify a [Query] by.
   String _createKey(Iterable<Filter> filters) {
     return filters.map((f) {
       if (!entityManager.world.componentManager.components.contains(f.type)) {
@@ -48,6 +55,7 @@ class QueryManager {
     }).join('-');
   }
 
+  /// Create or retrieve cached query.
   Query createQuery(Iterable<Filter> filters) {
     return _queries.update(
       _createKey(filters),
