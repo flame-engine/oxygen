@@ -10,9 +10,42 @@ class YourSystem extends System {
 
   @override
   void execute(double delta) { }
+}
 ```
 
 The `init()` will be called whenever the World that [the System is registered to](./world.md#registering-a-system) is [initialized](./world.md#initializing). And the `execute(delta)` will be called every time the World gets [executed](./world.md#executing).
+
+## Registering a System
+
+To register a System to the world you can pass an instance like so:
+```dart
+world.registerSystem(YourSystem());
+```
+
+Keep in mind, you **cannot** reuse system instances over multiple worlds, it will throw an assertion error if that happens. Just pass a new instance to the `registerSystem` method for each world that you want your system to be part of.
+
+## Unregistering a System
+
+To unregister a System from the world:
+```dart
+world.unregisterSystem<YourSystem>();
+```
+
+## Execution order
+
+Systems are executed in the order they are registed to the World. But each system can define it's own priority to ensure it gets executed before others:
+```dart
+class YourSystem extends System {
+  @override
+  int priority = 2;
+
+  @override
+  void init() { }
+
+  @override
+  void execute(double delta) { }
+}
+```
 
 ## Queries
 
