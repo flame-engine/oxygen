@@ -18,5 +18,3 @@ assignees: ''
 # More information
 <!-- Do you have any other useful information about this feature report? Please write it down here -->
 <!-- Possible helpful information: references to other sites/repositories -->
-
-<!-- DO NOT CHANGE ANYTHING BELOW THIS LINE -->
