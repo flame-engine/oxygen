@@ -44,7 +44,7 @@ This will run everything in the world once. You would normally call this somewhe
 
 ## Storing data
 
-It is also possible to store extra data in a World. This data will be accessable to anyone who has access to the World. It allows for passing data between systems or passing references that multiple systems need:
+It is also possible to store extra data in a World. This data will be accessible to anyone who has access to the World. It allows for passing data between systems or passing references that multiple systems need:
 ```dart
 // Storing
 world.store('yourKey', yourValue);
