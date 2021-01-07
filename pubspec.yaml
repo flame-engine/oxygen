@@ -1,5 +1,5 @@
 name: oxygen
-description: A lightweight Entity Component System written in Dart
+description: A lightweight Entity Component System framework written in Dart
 version: 0.0.1
 homepage: https://github.com/flame-engine/oxygen
 

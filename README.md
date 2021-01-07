@@ -3,7 +3,7 @@
 </h2>
 
 <p align="center">
-  A lightweight Entity Component System written in Dart.
+  A lightweight Entity Component System framework written in Dart.
 </p>
 
 <p align="center">
@@ -13,11 +13,21 @@
   <a title="Discord" href="https://discord.gg/JUwwvNryDz" ><img src="https://img.shields.io/discord/509714518008528896.svg" /></a>
 </p>
 
+## About Oxygen
+
+Oxygen is a lightweight Entity Component System framework written in Dart, with a focus on performance and ease of use. Oxygen is by design agnostic, and any game engine you want to use can be used with Oxygen.
+
+## Goals
+
+Oxygen is heavily inspired by [ECSY](https://ecsy.io/), and because of that it shares the same design principals. The main goal for Oxygen is to be lightweight, performant and simple to use. With APIs that try and help you make good use of the ECS design pattern, without restricting you in building your logic.
+
 ## Documentation
-See the [documentation](https://github.com/flame-engine/oxygen/blob/master/doc) for more information.
+
+See the [documentation](https://github.com/flame-engine/oxygen/blob/master/doc) for more information about how to work with Oxygen.
 
 ## Contributing
-For contributing see our [Contributing guidelines](https://github.com/flame-engine/oxygen/blob/master/CONTRIBUTING.md).
+
+For contributing see our [Contributing guidelines](https://github.com/flame-engine/oxygen/blob/master/CONTRIBUTING.md). Please read this carefully as it will answer most of your contributing-related questions.
 
 ## Credits
-- Inspired by [ECSY](https://ecsy.io/)
+- Inspired by [ecsy](https://ecsy.io/)
