@@ -13,7 +13,7 @@ assignees: ''
 <!-- What part of the code/functionality could be improved? -->
 
 # Why should this be improved
-<!--  Why is this necessary to get improved? -->
+<!--  Why is this necessary to be improved? -->
 
 # Any risks?
 <!-- Are there any risks in improving this? Will the API change? Will other functionality change? -->

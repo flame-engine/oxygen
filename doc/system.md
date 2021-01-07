@@ -37,7 +37,7 @@ Systems are executed in the order they are registed to the World. But each syste
 ```dart
 class YourSystem extends System {
   @override
-  int priority = 2;
+  final priority = 2;
 
   @override
   void init() { }

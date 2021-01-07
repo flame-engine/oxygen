@@ -1,6 +1,6 @@
 # Component
 
-A Component is a way to store data for an Entity. It does not define any kind of behaviour because that is handled by the systems. A Component can be anything you want, there is no defacto standard of implementing one:
+A Component is a way to store data for an Entity. It does not define any kind of behaviour because that is handled by the systems. A Component can be anything you want, there is no defacto standard for implementing one:
 ```dart
 class YourComponent extends Component {
   int yourProperty;
@@ -68,4 +68,4 @@ When you want to create an Entity with certain components in a World, you first 
 world.registerComponent(() => YourComponent());
 ```
 
-This `builder` closure will be automatically called whenever the pool for this component is empty, and new instances are required. See [Component Pooling](./object_pooling.md#component-pooling) for more information.
+This `builder` closure will be automatically called whenever the pool for this component is empty and new instances are required. See [Component Pooling](./object_pooling.md#component-pooling) for more information.

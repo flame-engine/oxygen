@@ -3,3 +3,6 @@ contact_links:
   - name: I have some questions about Oxygen.
     url: https://stackoverflow.com/tags/oxygen
     about: Ask your questions on StackOverflow! The community is always willing to help out.
+  - name: Join us on Discord!
+    url: https://discord.gg/JUwwvNryDz
+    about: Ask your questions in our community!
