@@ -23,11 +23,11 @@ void main() {
   // ...
 }
 ```
-> Components are part of their own object pool, and each instance will be acquired and released from that pool when needed. The `init` will be called on acquire, and the `reset` on release. Therefore components do not use constructors. See [Object Pooling](./object_pooling.md) for more information.
+> Components are part of their own object pool, and each instance will be acquired and released from that pool when needed. The `init` method will be called on acquire, and the `reset` method on release. Therefore components do not use constructors. See [Object Pooling](./object_pooling.md) for more information.
 
 ## InitObject
 
-The `InitObject` defines the parameters with which components get initialized. By default it wont have any properties, but we can extends it to define custom properties that can be used in the Component:
+The `InitObject` defines the parameters with which components get initialized. By default it wont have any properties, but you can extends it to define custom properties that can be used in the Component:
 ```dart
 class YourInit extends InitObject {
   final int yourProperty;
@@ -37,7 +37,7 @@ class YourInit extends InitObject {
 ```
 > Each property in an `InitObject` should be final, as it is a immutable class.
 
-Now we can make the Component aware of his own `InitObject` like so:
+Now you can make the Component aware of his own `InitObject` like so:
 ```dart
 class YourComponent extends Component<YourInit> {
   int yourProperty;

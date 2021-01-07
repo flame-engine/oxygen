@@ -13,22 +13,22 @@ class YourSystem extends System {
 }
 ```
 
-The `init()` will be called whenever the World that [the System is registered to](./world.md#registering-a-system) is [initialized](./world.md#initializing). And the `execute(delta)` will be called every time the World gets [executed](./world.md#executing).
+The `init()` method will be called whenever the World that [the System is registered to](./world.md#registering-a-system) is [initialized](./world.md#initializing). And the `execute(delta)` method will be called every time the World gets [executed](./world.md#executing).
 
 ## Registering a System
 
-To register a System to the world you can pass an instance like so:
+To register a System to the world you can pass an instance like this:
 ```dart
 world.registerSystem(YourSystem());
 ```
 
 Keep in mind, you **cannot** reuse system instances over multiple worlds, it will throw an assertion error if that happens. Just pass a new instance to the `registerSystem` method for each world that you want your system to be part of.
 
-## Unregistering a System
+## Deregistering a System
 
-To unregister a System from the world:
+To deregister a System from the world:
 ```dart
-world.unregisterSystem<YourSystem>();
+world.deregisterSystem<YourSystem>();
 ```
 
 ## Execution order

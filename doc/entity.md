@@ -18,7 +18,7 @@ entity
   ..add<YourComponentB>(YourInitObjectB());
 ```
 
-Only one instance of the same Component can be added to an Entity. After adding it to an Entity all the queries that are interested will be updated.
+Only one instance of the same Component can be added to an Entity. After adding it to an Entity all the queries that are subscribed will be updated.
 
 For more information about components and how they work see the [Component documentation](./component.md).
 

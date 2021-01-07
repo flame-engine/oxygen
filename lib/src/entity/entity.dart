@@ -19,7 +19,7 @@ class Entity extends PoolObject<String> {
   /// Indication if this entity is no longer "in this world".
   bool alive = false;
 
-  /// Optional name to identify a entity by.
+  /// Optional name to identify an entity by.
   String name;
 
   Entity(this._entityManager) : id = _entityManager._nextEntityId++;

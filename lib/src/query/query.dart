@@ -22,6 +22,6 @@ class Query {
     }
   }
 
-  /// Check if given entity matches against the query.
+  /// Check if the given entity matches against the query.
   bool match(Entity entity) => _filters.every((filter) => filter.match(entity));
 }

@@ -2,7 +2,7 @@ part of oxygen;
 
 @immutable
 
-/// A InitObject defines the parameters with which components get initialized.
+/// An InitObject defines the parameters with which components get initialized.
 abstract class InitObject {}
 
 /// A Component is a way to store data for an Entity.

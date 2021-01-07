@@ -17,7 +17,7 @@ class EntityPool extends ObjectPool<Entity> {
 /// there is nothing implemented on the [World] for it yet
 /// but this manager would be able to handle that easily.
 class EntityManager {
-  /// The World where this manager belongs to.
+  /// The World which this manager belongs to.
   final World world;
 
   /// Active entities in the world.
@@ -26,7 +26,7 @@ class EntityManager {
   /// Entities that are ready to be removed.
   List<Entity> _entitiesToRemove = [];
 
-  /// Entities with names are easy accesable this way.
+  /// Entities with names are easily accesable this way.
   final Map<String, Entity> _entitiesByName = {};
 
   /// The pool from which entities are pulled and released into.
@@ -43,7 +43,7 @@ class EntityManager {
     _queryManager = QueryManager(this);
   }
 
-  /// Get a entity by name.
+  /// Get an entity by name.
   ///
   /// Will return `null` if none is found.
   Entity getEntityByName(String name) => _entitiesByName[name];
@@ -128,7 +128,7 @@ class EntityManager {
     }
   }
 
-  /// Set an entity for removal.
+  /// Mark an entity for removal.
   ///
   /// It will be fully removed in the next execute cycle.
   void removeEntity(Entity entity) {

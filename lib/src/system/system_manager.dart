@@ -29,8 +29,10 @@ class SystemManager {
     _systems.sort((a, b) => a.priority - b.priority);
   }
 
-  /// Unregister a system.
-  void unregisterSystem(Type systemType) {
+  /// Deregister a previously registered system.
+  ///
+  /// If the given system type is not found, it will simply return.
+  void deregisterSystem(Type systemType) {
     if (!_systemsByType.containsKey(systemType)) {
       return;
     }

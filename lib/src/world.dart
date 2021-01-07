@@ -42,9 +42,9 @@ class World {
     systemManager.registerSystem(system);
   }
 
-  /// Remove a registered [System].
-  void unregisterSystem<T extends System>() {
-    systemManager.unregisterSystem(T);
+  /// Deregister a registered [System].
+  void deregisterSystem<T extends System>() {
+    systemManager.deregisterSystem(T);
   }
 
   /// Register a [Component] builder.

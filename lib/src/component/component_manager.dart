@@ -14,7 +14,7 @@ class ComponentPool<T extends Component> extends ObjectPool<T> {
 
 /// Manages all the components in a [World].
 class ComponentManager {
-  /// The World where this manager belongs to.
+  /// The World which this manager belongs to.
   final World world;
 
   /// List of registered components.

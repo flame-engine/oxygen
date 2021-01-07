@@ -13,9 +13,9 @@ See [Registering a Component](./component.md#registering-a-component) for more i
 
 See [Registering a System](./system.md#registering-a-system) for more information.
 
-### Unregister a System.
+### Deregister a System.
 
-See [Unregistering a System](./system.md#unregistering-a-system) for more information.
+See [Deregistering a System](./system.md#deregistering-a-system) for more information.
 
 ## Creating an Entity
 
@@ -35,7 +35,7 @@ This will initialize all the systems and make sure everything is in place.
 
 ## Executing
 
-Now we can execute the world by passing the delta since the last execution time:
+Now you can execute the world by passing the delta since the last execution time:
 ```dart
 world.execute(delta);
 ```

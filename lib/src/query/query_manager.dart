@@ -43,7 +43,7 @@ class QueryManager {
     }
   }
 
-  /// Creates unique key to identify a [Query] by.
+  /// Creates a unique key to identify a [Query] by.
   String _createKey(Iterable<Filter> filters) {
     return filters.map((f) {
       if (!entityManager.world.componentManager.components.contains(f.type)) {
@@ -55,7 +55,7 @@ class QueryManager {
     }).join('-');
   }
 
-  /// Create or retrieve cached query.
+  /// Create or retrieve a cached query.
   Query createQuery(Iterable<Filter> filters) {
     return _queries.update(
       _createKey(filters),
