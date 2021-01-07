@@ -19,7 +19,7 @@ class YourSystem extends System {
 }
 ```
 
-A query will always be updated with entities that match the filters. So whenever an entity's component list changes it will be reflected in all the queries.
+A query will always be updated with entities that match its filters. So whenever an entity's component list changes it will be reflected in all the queries.
 
 ## Filters
 
