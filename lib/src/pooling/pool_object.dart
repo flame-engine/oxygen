@@ -5,6 +5,8 @@ abstract class PoolObject<T> {
   ObjectPool _pool;
 
   /// Initialize this object.
+  ///
+  /// See [ObjectPool.acquire] for more information on how this gets called.
   void init([T data]);
 
   /// Reset this object.

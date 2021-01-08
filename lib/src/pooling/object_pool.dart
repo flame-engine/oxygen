@@ -24,6 +24,8 @@ abstract class ObjectPool<T extends PoolObject> {
   ///
   /// If the pool is empty it will automically grow by 20% + 1.
   /// To ensure there is always something in the pool.
+  ///
+  /// The [data] argument will be passed to [PoolObject.init] when it gets acquired.
   T acquire([data]) {
     if (_pool.isEmpty) {
       expand((_count * 0.2).floor() + 1);

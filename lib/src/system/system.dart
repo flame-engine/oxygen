@@ -12,7 +12,10 @@ abstract class System {
   /// The priority of this system.
   ///
   /// Used to set the priority of this system compared to the other systems.
-  int priority = 0;
+  /// A System with a priority of 1 will go before a System with a priority of 2.
+  ///
+  /// It can't be changed at runtime.
+  final priority = 0;
 
   System({this.priority = 0});
 
