@@ -1,3 +1,4 @@
+/// A lightweight Entity Component System written in Dart.
 library oxygen;
 
 import 'dart:collection';

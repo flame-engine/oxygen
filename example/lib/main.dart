@@ -28,8 +28,8 @@ void main(List<String> arguments) {
   for (var y = .0; y < stdout.terminalLines; y++) {
     for (var x = .0; x < 3; x++) {
       world.createEntity()
-        ..addComponent<RenderComponent>()
-        ..addComponent<PositionComponent>(PositionInit(x + offset, y));
+        ..add<RenderComponent>()
+        ..add<PositionComponent>(PositionInit(x + offset, y));
     }
     offset++;
   }
@@ -37,15 +37,17 @@ void main(List<String> arguments) {
   world.init();
 
   var watch = Stopwatch()..start();
+  var last = watch.elapsedMilliseconds;
 
-  int now, last = watch.elapsedMilliseconds;
+  void run() {
+    final time = watch.elapsedMilliseconds;
+    final delta = time - last;
+    world.execute(delta / FRAME_TIME);
+    last = time;
 
-  while (true) {
-    now = watch.elapsedMilliseconds;
-    world.store('delta', (now - last) / FRAME_TIME);
-    last = now;
-
-    world.execute();
     sleep(Duration(milliseconds: FRAME_TIME));
+    run();
   }
+
+  run();
 }

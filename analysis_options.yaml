@@ -1,0 +1,21 @@
+# Be aware the health of this package is based on these
+# analyse options, we will get the most health points if
+# we do not change anything, see:
+# https://pub.dev/help#health
+
+# Defines a default set of lint rules enforced for
+# projects at Google. For details and rationale,
+# see https://github.com/dart-lang/pedantic#enabled-lints.
+include: package:pedantic/analysis_options.yaml
+
+# For lint rules and documentation, see http://dart-lang.github.io/linter/lints.
+# Uncomment to specify additional rules.
+linter:
+  rules:
+    - unnecessary_brace_in_string_interps
+    - non_constant_identifier_names
+    - cancel_subscriptions
+
+# analyzer:
+#   exclude:
+#     - path/to/excluded/files/**

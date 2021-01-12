@@ -15,11 +15,9 @@ class MoveSystem extends System {
   }
 
   @override
-  void execute() {
-    final delta = world.retrieve<double>('delta');
-
+  void execute(delta) {
     query.entities.forEach((entity) {
-      final position = entity.getComponent<PositionComponent>();
+      final position = entity.get<PositionComponent>();
 
       if (position.x < stdout.terminalColumns) {
         position.x += 1 * delta;

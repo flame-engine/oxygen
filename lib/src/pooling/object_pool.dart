@@ -1,7 +1,7 @@
 part of oxygen;
 
 abstract class ObjectPool<T extends PoolObject> {
-  Queue<T> _pool = Queue<T>();
+  final Queue<T> _pool = Queue<T>();
 
   int _count = 0;
 
@@ -24,8 +24,10 @@ abstract class ObjectPool<T extends PoolObject> {
   ///
   /// If the pool is empty it will automically grow by 20% + 1.
   /// To ensure there is always something in the pool.
+  ///
+  /// The [data] argument will be passed to [PoolObject.init] when it gets acquired.
   T acquire([data]) {
-    if (_pool.length <= 0) {
+    if (_pool.isEmpty) {
       expand((_count * 0.2).floor() + 1);
     }
 
@@ -45,6 +47,6 @@ abstract class ObjectPool<T extends PoolObject> {
     _count += count;
   }
 
-  /// Builder that fills the pool.
+  /// Builder for creating a new instance of a [PoolObject].
   T builder();
 }
