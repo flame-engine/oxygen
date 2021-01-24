@@ -48,7 +48,9 @@ class World {
   }
 
   /// Register a [Component] builder.
-  void registerComponent<T extends Component>(ComponentBuilder<T> builder) {
+  void registerComponent<T extends Component<V>, V>(
+    ComponentBuilder<T> builder,
+  ) {
     componentManager.registerComponent(builder);
   }
 

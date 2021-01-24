@@ -1,20 +1,20 @@
 import 'package:oxygen/oxygen.dart';
 
-class PositionInit extends InitObject {
+class Position {
   final double x;
 
   final double y;
 
-  PositionInit(this.x, this.y);
+  Position(this.x, this.y);
 }
 
-class PositionComponent extends Component<PositionInit> {
+class PositionComponent extends Component<Position> {
   double x;
 
   double y;
 
   @override
-  void init([covariant PositionInit data]) {
+  void init([Position data]) {
     x = data?.x ?? 0;
     y = data?.y ?? 0;
   }

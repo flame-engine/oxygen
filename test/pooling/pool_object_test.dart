@@ -10,7 +10,7 @@ class TestObject extends PoolObject<int> {
   void reset() {}
 }
 
-class TestPool extends ObjectPool<TestObject> {
+class TestPool extends ObjectPool<TestObject, int> {
   TestPool({int initialSize}) : super(initialSize: initialSize);
 
   @override

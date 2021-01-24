@@ -22,7 +22,7 @@ class RenderSystem extends System {
 
     query.entities.forEach((entity) {
       final position = entity.get<PositionComponent>();
-      final key = entity.get<RenderComponent>().key;
+      final key = entity.get<RenderComponent>().value;
 
       stdout.write('\x1B[${position.y.toInt()};${position.x.toInt()}H');
       stdout.write(key);

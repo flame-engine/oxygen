@@ -14,8 +14,8 @@ final entity = world.createEntity('Optional name');
 After you have created an entity you can easily add new components:
 ```dart
 entity
-  ..add<YourComponentA>(YourInitObjectA());
-  ..add<YourComponentB>(YourInitObjectB());
+  ..add<YourComponentA, YourInitDataA>(someInitData);
+  ..add<YourComponentB, YourInitDataB>(someOtherInitData);
 ```
 
 Only one instance of the same Component can be added to an Entity. After adding it to an Entity all the queries that are subscribed will be updated.

@@ -6,8 +6,8 @@ class YourComponent extends Component {
   int yourProperty;
 
   @override
-  void init([InitObject data]) {
-    yourPoperty = 10;
+  void init([data]) {
+    yourProperty = 10;
   }
 
   @override
@@ -19,32 +19,22 @@ class YourComponent extends Component {
 void main() {
   // ...
   final yourEntity = world.createEntity()
-    ..add<YourComponent>();
+    ..add<YourComponent, void>();
   // ...
 }
 ```
-> Components are part of their own object pool, and each instance will be acquired and released from that pool when needed. The `init` method will be called on acquire, and the `reset` method on release. Therefore components do not use constructors. See [Object Pooling](./object_pooling.md) for more information.
+> Components have their own object pool, and each instance will be acquired and released from that pool when needed. The `init` method will be called on acquire, and the `reset` method on release. Therefore components do not use constructors. See [Object Pooling](./object_pooling.md) for more information.
 
-## InitObject
+## Initializing a Component with data
 
-The `InitObject` defines the parameters with which components get initialized. By default it wont have any properties, but you can extends it to define custom properties that can be used in the Component:
+You can also pass data to the `init` method. To ensure proper handling of the data you first have to tell the Component what kind of init data it will receive:
 ```dart
-class YourInit extends InitObject {
-  final int yourProperty;
-
-  YourInit({this.yourProperty});
-}
-```
-> Each property in an `InitObject` should be final, as it is a immutable class.
-
-Now you can make the Component aware of his own `InitObject` like so:
-```dart
-class YourComponent extends Component<YourInit> {
+class YourComponent extends Component<int> {
   int yourProperty;
 
   @override
-  void init([YourInit data]) {
-    yourPoperty = data.yourProperty;
+  void init([int data]) {
+    yourPoperty = data;
   }
 
   @override
@@ -52,11 +42,34 @@ class YourComponent extends Component<YourInit> {
     yourProperty = null;
   }
 }
+```
 
+You can then add your Component to an Entity and pass along the required data:
+```dart
 void main() {
   // ...
   final yourEntity = world.createEntity()
-    ..add<YourComponent>(YourInit(yourProperty: 10));
+    ..add<YourComponent, int>(10) // With data
+    ..add<YourComponent, int>(); // Without data
+  // ...
+}
+```
+
+The data can be `null` and only an instance of the given type or a type that extends from that type is allowed. If any other type is given an assertion exception will be thrown.
+
+## Single value components
+
+Whenever you need to define a Component that only holds a single value you can make use of the `ValueComponent` class. With the `ValueComponent` you can easily define single value components:
+```dart
+class PositionComponent extends ValueComponent<Position> {}
+ 
+void main() {
+  // ...
+  final entity = world.createEntity()
+    ..add<PositionComponent, Position>(Position(0, 0));
+  // ...
+  // You can then retrieve the position value.
+  final position = entity.get<PositionComponent>().value;
   // ...
 }
 ```
