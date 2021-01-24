@@ -11,9 +11,9 @@ Each Component has its own object pool, Oxygen does this to ensure there is no o
 
 So whenever a Component is added to an Entity:
 ```dart
-entity.addComponent<AComponent>();
+entity.add<AComponent, void>();
 ```
 it will try and reuse a `AComponent` instance, from the `AComponent` pool. It won't allocate a new instance if there are still instances left in the pool, it will be returned to the pool by calling:
 ```dart
-entity.removeComponent<AComponent>();
+entity.remove<AComponent, void>();
 ```
