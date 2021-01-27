@@ -9,7 +9,7 @@ If you're interested in contributing to this project, here are a few ways to do 
 * Also update the example and documentation if necessary.
 
 ## New Features
-* If you'd like to add a feature to the library that doesn't already exist, feel free to describe the feature in a new [Github issues](https://github.com/flame-engine/oxygen/issues/new). If it is a bigger change, you can also get some initial thoughts about it in our [discord](https://discord.gg/JUwwvNryDz).
+* If you'd like to add a feature to the library that doesn't already exist, feel free to describe the feature in a new [Github issue](https://github.com/flame-engine/oxygen/issues/new). If it is a bigger change, you can also get some initial thoughts about it in our [discord server](https://discord.gg/JUwwvNryDz).
 * Issues that have been identified as a feature request will be labelled "feature".
 * If you'd like to implement the new feature, please wait for feedback from the project maintainers before spending too much time writing the code. In some cases, enhancements may not align well with the project objectives at the time.
 * Implement your code and please read the [How To](#how-to) and [Development Guidelines](#development-guidelines).
@@ -17,7 +17,7 @@ If you're interested in contributing to this project, here are a few ways to do 
 
 ## Documentation & Miscellaneous
 * If you think the documentation could be clearer, or you have an alternative implementation of something that may have more advantages, we would love to hear it.
-* As always first file a report in a [Github issues](https://github.com/flame-engine/oxygen/issues/new).
+* As always first file a report in a [Github issue](https://github.com/flame-engine/oxygen/issues/new).
 * Issues that have been identified as a documentation change will be labelled "documentation".
 * Implement the changes to the documentation, please read the [How To](#how-to) and [Development Guidelines](#development-guidelines).
 
