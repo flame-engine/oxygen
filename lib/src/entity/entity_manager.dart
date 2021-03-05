@@ -30,13 +30,13 @@ class EntityManager {
   final Map<String, Entity> _entitiesByName = {};
 
   /// The pool from which entities are pulled and released into.
-  EntityPool _entityPool;
+  late EntityPool _entityPool;
 
   /// The next identifier for an [Entity].
   int _nextEntityId = 0;
 
   /// QueryManager for this type of [Entity].
-  QueryManager _queryManager;
+  late QueryManager _queryManager;
 
   EntityManager(this.world) {
     _entityPool = EntityPool(this);
@@ -44,14 +44,12 @@ class EntityManager {
   }
 
   /// Get an entity by name.
-  ///
-  /// Will return `null` if none is found.
-  Entity getEntityByName(String name) => _entitiesByName[name];
+  Entity? getEntityByName(String name) => _entitiesByName[name];
 
   /// Create a new entity.
   ///
   /// Will acquire a new entity from the pool, and initialize it.
-  Entity createEntity([String name]) {
+  Entity createEntity([String? name]) {
     final entity = _entityPool.acquire(name);
     entity.id = _nextEntityId++;
 
@@ -68,7 +66,7 @@ class EntityManager {
   /// If the entity already has that component it will just return.
   ///
   /// The [data] argument has to be of the type [V].
-  void addComponentToEntity<T extends Component<V>, V>(Entity entity, V data) {
+  void addComponentToEntity<T extends Component<V>, V>(Entity entity, V? data) {
     assert(T != Component, 'An implemented Component was expected');
     assert(
       world.componentManager.components.contains(T),
@@ -105,7 +103,7 @@ class EntityManager {
 
     entity._componentTypes.remove(componentType);
     final component = entity._components.remove(componentType);
-    component.dispose();
+    component?.dispose();
 
     _queryManager._onComponentRemovedFromEntity(entity, componentType);
   }
@@ -147,6 +145,6 @@ class EntityManager {
     if (_entitiesByName.containsKey(entity.name)) {
       _entitiesByName.remove(entity.name);
     }
-    entity._pool.release(entity);
+    entity._pool?.release(entity);
   }
 }

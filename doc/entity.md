@@ -25,13 +25,13 @@ For more information about components and how they work see the [Component docum
 ## Retrieving Components
 ```dart
 final yourComponent = entity.get<YourComponent>();
-yourComponent.property = someValue;
+yourComponent?.property = someValue;
 ```
 
 ## Checking if it has a Component
 ```dart
 if (entity.has<YourComponent>()) {
-  final yourComponent = entity.get<YourComponent>();
+  final yourComponent = entity.get<YourComponent>()!;
   // ...
 }
 ```

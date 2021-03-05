@@ -42,6 +42,6 @@ class ComponentManager {
   }
 
   ComponentPool<T> getComponentPool<T extends Component<V>, V>() {
-    return _componentPool[T];
+    return _componentPool[T] as ComponentPool<T>;
   }
 }

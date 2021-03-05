@@ -4,14 +4,14 @@ import 'package:oxygen/oxygen.dart';
 
 class TestObject extends PoolObject<int> {
   @override
-  void init([int data]) {}
+  void init([int? data]) {}
 
   @override
   void reset() {}
 }
 
 class TestPool extends ObjectPool<TestObject, int> {
-  TestPool({int initialSize}) : super(initialSize: initialSize);
+  TestPool({int? initialSize}) : super(initialSize: initialSize);
 
   @override
   TestObject builder() => TestObject();
@@ -21,7 +21,7 @@ const initialSize = 1;
 
 void main() {
   group('PoolObject', () {
-    TestPool pool;
+    late TestPool pool;
 
     setUp(() {
       pool = TestPool(initialSize: initialSize);

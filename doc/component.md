@@ -3,7 +3,7 @@
 A Component is a way to store data for an Entity. It does not define any kind of behaviour because that is handled by the systems. A Component can be anything you want, there is no defacto standard for implementing one:
 ```dart
 class YourComponent extends Component {
-  int yourProperty;
+  int? yourProperty;
 
   @override
   void init([data]) {
@@ -30,11 +30,11 @@ void main() {
 You can also pass data to the `init` method. To ensure proper handling of the data you first have to tell the Component what kind of init data it will receive:
 ```dart
 class YourComponent extends Component<int> {
-  int yourProperty;
+  int? yourProperty;
 
   @override
-  void init([int data]) {
-    yourPoperty = data;
+  void init([int? data]) {
+    yourProperty = data;
   }
 
   @override
@@ -69,7 +69,7 @@ void main() {
     ..add<PositionComponent, Position>(Position(0, 0));
   // ...
   // You can then retrieve the position value.
-  final position = entity.get<PositionComponent>().value;
+  final position = entity.get<PositionComponent>()?.value;
   // ...
 }
 ```

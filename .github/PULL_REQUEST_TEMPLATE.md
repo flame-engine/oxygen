@@ -15,7 +15,7 @@ Before you create this PR confirm that it meets all requirements listed below by
 - [ ] I have added a description of the change under `[next]` in `CHANGELOG.md`.
 - [ ] I am willing to follow-up on review comments in a timely manner.
 - [ ] I am happy with the current version of this PR and it is ready to be reviewed
-  - If the PR still has the `Draft` status, remove it by clicking on the `Ready for review` button in this PR.
+- [ ] If the PR still has the `Draft` status, remove it by clicking on the `Ready for review` button in this PR.
 
 ## Breaking Change
 

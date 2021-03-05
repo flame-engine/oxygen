@@ -14,7 +14,7 @@ abstract class ObjectPool<T extends PoolObject<V>, V> {
   /// The amount of objects that are in use in the pool.
   int get totalUsed => _count - _pool.length;
 
-  ObjectPool({int initialSize}) {
+  ObjectPool({int? initialSize}) {
     if (initialSize != null) {
       expand(initialSize);
     }
@@ -26,7 +26,7 @@ abstract class ObjectPool<T extends PoolObject<V>, V> {
   /// To ensure there is always something in the pool.
   ///
   /// The [data] argument will be passed to [PoolObject.init] when it gets acquired.
-  T acquire([V data]) {
+  T acquire([V? data]) {
     if (_pool.isEmpty) {
       expand((_count * 0.2).floor() + 1);
     }

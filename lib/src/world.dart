@@ -5,11 +5,11 @@ class World {
 
   Iterable<Entity> get entities => entityManager._entities;
 
-  EntityManager entityManager;
+  late EntityManager entityManager;
 
-  ComponentManager componentManager;
+  late ComponentManager componentManager;
 
-  SystemManager systemManager;
+  late SystemManager systemManager;
 
   World() {
     entityManager = EntityManager(this);
@@ -21,7 +21,7 @@ class World {
   void store<T>(String key, T item) => _storedItems[key] = item;
 
   /// Retrieve extra data.
-  T retrieve<T>(String key) => _storedItems[key];
+  T? retrieve<T>(String key) => _storedItems[key];
 
   /// Remove extra data.
   void remove(String key) => _storedItems[key] = null;
@@ -55,7 +55,7 @@ class World {
   }
 
   /// Create a new [Entity].
-  Entity createEntity([String name]) => entityManager.createEntity(name);
+  Entity createEntity([String? name]) => entityManager.createEntity(name);
 
   /// Execute everything in the World once.
   void execute(double delta) {

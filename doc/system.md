@@ -52,7 +52,7 @@ class YourSystem extends System {
 A System can create queries on entities to filter through them based on their components:
 ```dart
 class YourSystem extends System {
-  Query query;
+  late Query query;
 
   @override
   void init() { 
@@ -63,6 +63,7 @@ class YourSystem extends System {
   void execute(double delta) { 
     query.entities.forEach((entity) {
       final yourComponent = entity.get<YourComponent>();
+      // ... 
     });
   }
 }
