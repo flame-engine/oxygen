@@ -13,8 +13,7 @@ class Query {
   /// Entities that are found through [_filters].
   List<Entity> entities = [];
 
-  Query(this.entityManager, this._filters)
-      : assert(_filters != null && _filters.isNotEmpty) {
+  Query(this.entityManager, this._filters) : assert(_filters.isNotEmpty) {
     for (final entity in entityManager._entities) {
       if (match(entity)) {
         entities.add(entity);
