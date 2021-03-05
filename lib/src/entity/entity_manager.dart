@@ -1,7 +1,7 @@
 part of oxygen;
 
 /// ObjectPool for entities.
-class EntityPool extends ObjectPool<Entity> {
+class EntityPool extends ObjectPool<Entity, String> {
   /// The manager that handles all the entities.
   EntityManager entityManager;
 
@@ -67,12 +67,8 @@ class EntityManager {
   ///
   /// If the entity already has that component it will just return.
   ///
-  /// The [data] argument has to be of the expected [InitObject]
-  /// variant for the given component.
-  void addComponentToEntity<T extends Component>(
-    Entity entity,
-    InitObject data,
-  ) {
+  /// The [data] argument has to be of the type [V].
+  void addComponentToEntity<T extends Component<V>, V>(Entity entity, V data) {
     assert(T != Component, 'An implemented Component was expected');
     assert(
       world.componentManager.components.contains(T),
@@ -83,13 +79,8 @@ class EntityManager {
       return; // Entity already has an instance of the component.
     }
 
-    final componentPool = world.componentManager.getComponentPool(T);
+    final componentPool = world.componentManager.getComponentPool<T, V>();
     final component = componentPool.acquire(data);
-
-    assert(
-      data == null || data.runtimeType == component.initType,
-      'Component $T expects an InitObject of type ${component.initType} but received ${data.runtimeType}',
-    );
 
     entity._componentTypes.add(T);
     entity._components[T] = component;

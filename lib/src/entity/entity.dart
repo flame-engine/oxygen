@@ -36,9 +36,9 @@ class Entity extends PoolObject<String> {
   bool has<T extends Component>() => _componentTypes.contains(T);
 
   /// Add a component.
-  void add<T extends Component>([InitObject data]) {
+  void add<T extends Component<V>, V>([V data]) {
     assert(T != Component, 'An implemented Component was expected');
-    _entityManager.addComponentToEntity<T>(this, data);
+    _entityManager.addComponentToEntity<T, V>(this, data);
   }
 
   /// Remove a component.

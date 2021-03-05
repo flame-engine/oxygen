@@ -7,7 +7,6 @@ assignees: ''
 
 ---
 
-
 <!-- When reporting a bug, please read this complete template and fill all the questions in order to get a better response -->
 
 # Current bug behaviour

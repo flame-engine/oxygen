@@ -1,6 +1,6 @@
 part of oxygen;
 
-abstract class ObjectPool<T extends PoolObject> {
+abstract class ObjectPool<T extends PoolObject<V>, V> {
   final Queue<T> _pool = Queue<T>();
 
   int _count = 0;
@@ -26,12 +26,16 @@ abstract class ObjectPool<T extends PoolObject> {
   /// To ensure there is always something in the pool.
   ///
   /// The [data] argument will be passed to [PoolObject.init] when it gets acquired.
-  T acquire([data]) {
+  T acquire([V data]) {
     if (_pool.isEmpty) {
       expand((_count * 0.2).floor() + 1);
     }
-
-    return _pool.removeLast()..init(data);
+    final object = _pool.removeLast();
+    assert(
+      data == null || data is V,
+      '$T expects an instance of $V but received ${data.runtimeType}',
+    );
+    return object..init(data);
   }
 
   /// Release a object back into the pool.

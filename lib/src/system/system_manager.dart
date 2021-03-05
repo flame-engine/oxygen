@@ -8,6 +8,8 @@ class SystemManager {
   /// All the registered systems.
   final List<System> _systems = [];
 
+  UnmodifiableListView<System> get systems => UnmodifiableListView(_systems);
+
   final Map<Type, System> _systemsByType = {};
 
   SystemManager(this.world);

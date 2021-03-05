@@ -28,8 +28,8 @@ void main(List<String> arguments) {
   for (var y = .0; y < stdout.terminalLines; y++) {
     for (var x = .0; x < 3; x++) {
       world.createEntity()
-        ..add<RenderComponent>()
-        ..add<PositionComponent>(PositionInit(x + offset, y));
+        ..add<RenderComponent, String>('x')
+        ..add<PositionComponent, Position>(Position(x + offset, y));
     }
     offset++;
   }

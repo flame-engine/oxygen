@@ -3,7 +3,7 @@ part of oxygen;
 typedef ComponentBuilder<T> = T Function();
 
 /// ObjectPool for a type of Component.
-class ComponentPool<T extends Component> extends ObjectPool<T> {
+class ComponentPool<T extends Component> extends ObjectPool<T, dynamic> {
   final ComponentBuilder<T> componentBuilder;
 
   ComponentPool(this.componentBuilder) : super();
@@ -21,7 +21,7 @@ class ComponentManager {
   final List<Type> components = [];
 
   /// Map of [ObjectPool]s for each kind of registered [Component].
-  final Map<Type, ComponentPool<Component>> _componentPool = {};
+  final Map<Type, ComponentPool> _componentPool = {};
 
   ComponentManager(this.world);
 
@@ -38,8 +38,10 @@ class ComponentManager {
     }
 
     components.add(T);
-    _componentPool[T] = ComponentPool(builder);
+    _componentPool[T] = ComponentPool<T>(builder);
   }
 
-  ComponentPool getComponentPool(Type component) => _componentPool[component];
+  ComponentPool<T> getComponentPool<T extends Component<V>, V>() {
+    return _componentPool[T];
+  }
 }
