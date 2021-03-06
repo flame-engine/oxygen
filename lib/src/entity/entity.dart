@@ -14,29 +14,29 @@ class Entity extends PoolObject<String> {
   final Set<Type> _componentTypes = {};
 
   /// Internal identifier.
-  int id;
+  int? id;
 
   /// Indication if this entity is no longer "in this world".
   bool alive = false;
 
   /// Optional name to identify an entity by.
-  String name;
+  String? name;
 
   Entity(this._entityManager) : id = _entityManager._nextEntityId++;
 
   /// Retrieves a Component by Type.
   ///
   /// If the component is not registered, it will return `null`.
-  T get<T extends Component>() {
+  T? get<T extends Component>() {
     assert(T != Component, 'An implemented Component was expected');
-    return _components[T];
+    return _components[T] as T?;
   }
 
   /// Check if a component is added.
   bool has<T extends Component>() => _componentTypes.contains(T);
 
   /// Add a component.
-  void add<T extends Component<V>, V>([V data]) {
+  void add<T extends Component<V>, V>([V? data]) {
     assert(T != Component, 'An implemented Component was expected');
     _entityManager.addComponentToEntity<T, V>(this, data);
   }
@@ -48,10 +48,10 @@ class Entity extends PoolObject<String> {
   }
 
   @override
-  void init([String name]) {
+  void init([String? name]) {
     // id gets set by the entityManager.
     alive = true;
-    this.name = name ?? '';
+    this.name = name;
   }
 
   @override

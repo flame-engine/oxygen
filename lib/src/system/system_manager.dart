@@ -39,7 +39,7 @@ class SystemManager {
       return;
     }
     final system = _systemsByType.remove(systemType);
-    system.world = null;
+    system?.dispose();
     _systems.remove(system);
 
     _systems.sort((a, b) => a.priority - b.priority);

@@ -3,7 +3,7 @@
 A Query is a way to retrieve entities by matching their components against the Query filters. They are used by systems to retrieve the entities they care about:
 ```dart
 class YourSystem extends System {
-  Query query;
+  late Query query;
 
   @override
   void init() { 
@@ -14,6 +14,7 @@ class YourSystem extends System {
   void execute(double delta) { 
     query.entities.forEach((entity) {
       final yourComponent = entity.get<YourComponent>();
+      // ...
     });
   }
 }

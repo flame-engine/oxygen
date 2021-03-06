@@ -9,12 +9,12 @@ class Position {
 }
 
 class PositionComponent extends Component<Position> {
-  double x;
+  double? x;
 
-  double y;
+  double? y;
 
   @override
-  void init([Position data]) {
+  void init([Position? data]) {
     x = data?.x ?? 0;
     y = data?.y ?? 0;
   }

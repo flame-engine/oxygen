@@ -7,7 +7,7 @@ part of oxygen;
 /// And they can iterate through those entities each execution frame.
 abstract class System {
   /// The world to which this system belongs to.
-  World world;
+  World? world;
 
   /// The priority of this system.
   ///
@@ -22,9 +22,15 @@ abstract class System {
   /// Initialize the System.
   void init();
 
+  /// Disposing of the System.
+  @mustCallSuper
+  void dispose() {
+    world = null;
+  }
+
   /// Create a new Query to filter entites.
   Query createQuery(Iterable<Filter> filters) =>
-      world.entityManager._queryManager.createQuery(filters);
+      world!.entityManager._queryManager.createQuery(filters);
 
   /// Execute the System.
   void execute(double delta);
