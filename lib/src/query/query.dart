@@ -10,13 +10,15 @@ class Query {
   /// The unique filters to filter by.
   final Iterable<Filter> _filters;
 
+  final List<Entity> _entities = [];
+
   /// Entities that are found through [_filters].
-  List<Entity> entities = [];
+  List<Entity> get entities => UnmodifiableListView(_entities);
 
   Query(this.entityManager, this._filters) : assert(_filters.isNotEmpty) {
     for (final entity in entityManager._entities) {
       if (match(entity)) {
-        entities.add(entity);
+        _entities.add(entity);
       }
     }
   }

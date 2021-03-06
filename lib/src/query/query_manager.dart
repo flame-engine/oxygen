@@ -15,8 +15,8 @@ class QueryManager {
 
   void _onEntityRemoved(Entity entity) {
     for (final query in _queries.values) {
-      if (query.entities.contains(entity)) {
-        query.entities.remove(entity);
+      if (query._entities.contains(entity)) {
+        query._entities.remove(entity);
       }
     }
   }
@@ -26,8 +26,8 @@ class QueryManager {
       // Entity should only be added when all the following conditions are met:
       // - the Entity matches the complete query.
       // - the Entity is not already part of the query.
-      if (query.match(entity) && !query.entities.contains(entity)) {
-        query.entities.add(entity);
+      if (query.match(entity) && !query._entities.contains(entity)) {
+        query._entities.add(entity);
       }
     }
   }
@@ -37,8 +37,8 @@ class QueryManager {
       // Entity should only be removed when all the following conditions are met:
       // - the Entity matches the complete query.
       // - the Entity is not already part of the query.
-      if (!query.match(entity) && query.entities.contains(entity)) {
-        query.entities.remove(entity);
+      if (!query.match(entity) && query._entities.contains(entity)) {
+        query._entities.remove(entity);
       }
     }
   }
