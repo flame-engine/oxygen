@@ -28,7 +28,10 @@ class Entity extends PoolObject<String> {
   ///
   /// If the component is not registered, it will return `null`.
   T? get<T extends Component>() {
-    assert(T != Component, 'An implemented Component was expected');
+    assert(
+      T != Component || T != ValueComponent,
+      'An implemented Component was expected',
+    );
     return _components[T] as T?;
   }
 
@@ -49,7 +52,6 @@ class Entity extends PoolObject<String> {
 
   @override
   void init([String? name]) {
-    // id gets set by the entityManager.
     alive = true;
     this.name = name;
   }
