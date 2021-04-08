@@ -133,7 +133,7 @@ class EntityManager {
   /// Process all removed entities from the last execute cycle.
   void processRemovedEntities() {
     _entitiesToRemove.forEach(_releaseEntity);
-    _entitiesToRemove = [];
+    _entitiesToRemove.clear();
   }
 
   /// Fully release and reset an entity.
