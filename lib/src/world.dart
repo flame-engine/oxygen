@@ -3,7 +3,8 @@ part of oxygen;
 class World {
   final HashMap<String, dynamic> _storedItems = HashMap();
 
-  List<Entity> get entities => UnmodifiableListView(entityManager._entities);
+  UnmodifiableListView<Entity> get entities =>
+      UnmodifiableListView(entityManager._entities);
 
   late EntityManager entityManager;
 

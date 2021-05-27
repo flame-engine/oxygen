@@ -1,5 +1,5 @@
 ## [next]
-- Made assertion for getting a `Component` stricter
+- Made assertion for getting/checking/removing a `Component` stricter
 - Made the `priority` field on `System` final
 
 ## 0.1.0
