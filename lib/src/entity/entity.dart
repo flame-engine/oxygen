@@ -40,13 +40,19 @@ class Entity extends PoolObject<String> {
 
   /// Add a component.
   void add<T extends Component<V>, V>([V? data]) {
-    assert(T != Component, 'An implemented Component was expected');
+    assert(
+      T != Component || T != ValueComponent,
+      'An implemented Component was expected',
+    );
     _entityManager.addComponentToEntity<T, V>(this, data);
   }
 
   /// Remove a component.
   void remove<T extends Component>() {
-    assert(T != Component, 'An implemented Component was expected');
+    assert(
+      T != Component || T != ValueComponent,
+      'An implemented Component was expected',
+    );
     _entityManager.removeComponentFromEntity<T>(this);
   }
 
