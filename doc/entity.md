@@ -9,6 +9,13 @@ You can create an entity by using the [World](./world.md):
 final entity = world.createEntity('Optional name');
 ```
 
+## Removing an Entity
+```dart
+entity.dispose();
+```
+
+This will mark the Entity for removal but won't be immediately disposed until the end of the last update cycle. This allows systems to react to the Entity.
+
 ## Adding Components
 
 After you have created an entity you can easily add new components:
@@ -36,9 +43,9 @@ if (entity.has<YourComponent>()) {
 }
 ```
 
-## Removing Components
+## Removing Component
 ```dart
-entity.removeComponent<YourComponent>();
+entity.remove<YourComponent>();
 ```
 
 This will mark the Component for removal but won't be immediately disposed until the end of the last update cycle. This allows systems to react to the data inside the Component.

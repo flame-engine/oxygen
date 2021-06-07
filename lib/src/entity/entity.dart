@@ -10,6 +10,8 @@ class Entity extends PoolObject<String> {
   /// Map of all the component added.
   final Map<Type, Component> _components = {};
 
+  final List<Type> _componentsToRemove = [];
+
   /// Set of all the component types that are added.
   final Set<Type> _componentTypes = {};
 
