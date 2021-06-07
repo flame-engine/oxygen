@@ -45,5 +45,11 @@ class RenderSystem extends System {
       foregroundColor: Colors.green,
       position: Vector2(0, 1),
     );
+    terminal.draw(
+      ' W A S D | Move Tim\n'
+      '   Space | Shoot',
+      foregroundColor: Colors.green,
+      position: terminal.viewport.bottomLeft.translate(0, -2),
+    );
   }
 }

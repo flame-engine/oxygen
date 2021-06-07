@@ -38,8 +38,6 @@ class QueryManager {
       // - the Entity matches the complete query.
       // - the Entity is not already part of the query.
       if (!query.match(entity) && query._entities.contains(entity)) {
-        // WLFN: Somehow the below todo is no longer valid??? Need to investigate
-        // TODO: This should be removed after the frame and not directy on the list
         query._entities.remove(entity);
       }
     }

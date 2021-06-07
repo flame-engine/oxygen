@@ -24,7 +24,7 @@ class EntityManager {
   final List<Entity> _entities = [];
 
   /// Entities that are ready to be removed.
-  List<Entity> _entitiesToRemove = [];
+  final List<Entity> _entitiesToRemove = [];
 
   /// Entities with names are easily accesable this way.
   final Map<String, Entity> _entitiesByName = {};

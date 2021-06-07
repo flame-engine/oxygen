@@ -1,4 +1,3 @@
-import 'package:example/components/player_component.dart';
 import 'package:example/components/position_component.dart';
 import 'package:example/components/velocity_component.dart';
 import 'package:example/utils/terminal.dart';

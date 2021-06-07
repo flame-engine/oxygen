@@ -41,7 +41,7 @@ class ExampleGame extends Game {
       ..add<ColorComponent, Color>(Colors.red)
       ..add<RenderComponent, String>('█')
       ..add<PositionComponent, Vector2>(
-        terminal.viewport.center.translate(0, -10),
+        terminal.viewport.topRight.translate(-terminal.viewport.center.x, 0),
       );
 
     world.createEntity()
