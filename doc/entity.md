@@ -43,7 +43,7 @@ if (entity.has<YourComponent>()) {
 }
 ```
 
-## Removing Component
+## Removing Components
 ```dart
 entity.remove<YourComponent>();
 ```
