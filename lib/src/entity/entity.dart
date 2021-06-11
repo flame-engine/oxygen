@@ -7,7 +7,7 @@ class Entity extends PoolObject<String> {
   /// The manager that handles all the entities.
   final EntityManager _entityManager;
 
-  /// Map of all the component added.
+  /// Map of all the components added.
   final Map<Type, Component> _components = {};
 
   final List<Type> _componentsToRemove = [];
