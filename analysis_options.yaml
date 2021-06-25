@@ -16,6 +16,6 @@ linter:
     - non_constant_identifier_names
     - cancel_subscriptions
 
-# analyzer:
-#   exclude:
-#     - path/to/excluded/files/**
+analyzer:
+  exclude:
+    - example/** # Needed for CI/CD.. 
