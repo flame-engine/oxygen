@@ -3,7 +3,6 @@ import 'package:oxygen/oxygen.dart';
 
 class PositionComponent extends Component<Vector2> {
   int? x;
-
   int? y;
 
   @override

@@ -2,15 +2,11 @@ import 'package:example/utils/vector2.dart';
 
 class Rect {
   final int left;
-
   final int top;
-
   final int right;
-
   final int bottom;
 
   int get width => right - left;
-
   int get height => bottom - top;
 
   Vector2 get topLeft => Vector2(left, top);

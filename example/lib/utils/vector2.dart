@@ -1,6 +1,5 @@
 class Vector2 {
   final int x;
-
   final int y;
 
   const Vector2(this.x, this.y);
