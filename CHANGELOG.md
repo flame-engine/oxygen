@@ -1,4 +1,4 @@
-## [next]
+## 0.2.0
 - Made assertion for getting/checking/removing a `Component` stricter
 - **BREAKING**: Made the `priority` field on `System` final
 - **BREAKING**: Components will now be marked for removal. This fixes the concurrent modification error
