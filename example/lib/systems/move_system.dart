@@ -1,8 +1,8 @@
-import 'dart:io';
-
+import 'package:example/components/position_component.dart';
+import 'package:example/components/velocity_component.dart';
+import 'package:example/utils/terminal.dart';
+import 'package:example/utils/vector2.dart';
 import 'package:oxygen/oxygen.dart';
-
-import '../components/position_component.dart';
 
 class MoveSystem extends System {
   late Query query;
@@ -10,26 +10,23 @@ class MoveSystem extends System {
   @override
   void init() {
     query = createQuery([
+      Has<VelocityComponent>(),
       Has<PositionComponent>(),
     ]);
   }
 
   @override
   void execute(delta) {
-    query.entities.forEach((entity) {
+    for (final entity in query.entities) {
       final position = entity.get<PositionComponent>()!;
+      final velocity = entity.get<VelocityComponent>()!;
 
-      if (position.x! < stdout.terminalColumns) {
-        position.x = position.x! + 1 * delta;
-      } else {
-        position.x = 0;
-      }
+      position.x = position.x! + velocity.x!;
+      position.y = position.y! + velocity.y!;
 
-      if (position.y! < stdout.terminalLines) {
-        position.y = position.y! + 1 * delta;
-      } else {
-        position.y = 0;
+      if (!terminal.viewport.contains(Vector2(position.x!, position.y!))) {
+        entity.dispose();
       }
-    });
+    }
   }
 }

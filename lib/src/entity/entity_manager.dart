@@ -13,18 +13,21 @@ class EntityPool extends ObjectPool<Entity, String> {
 
 /// Manages all the entities in a [World].
 ///
-/// **Note**: Technically speaking we can have multiple types of entities,
-/// there is nothing implemented on the [World] for it yet
-/// but this manager would be able to handle that easily.
+/// **Note**: Technically speaking we can have multiple types of entities, there
+/// is nothing implemented on the [World] for it yet but this manager would be
+/// able to handle that easily.
 class EntityManager {
-  /// The World which this manager belongs to.
+  /// The [World] which this manager belongs to.
   final World world;
 
-  /// Active entities in the world.
+  /// Active entities in the [world].
   final List<Entity> _entities = [];
 
+  /// Entities that have components that should be removed.
+  final List<Entity> _entitiesWithRemovedComponents = [];
+
   /// Entities that are ready to be removed.
-  List<Entity> _entitiesToRemove = [];
+  final List<Entity> _entitiesToRemove = [];
 
   /// Entities with names are easily accesable this way.
   final Map<String, Entity> _entitiesByName = {};
@@ -35,7 +38,7 @@ class EntityManager {
   /// The next identifier for an [Entity].
   int _nextEntityId = 0;
 
-  /// QueryManager for this type of [Entity].
+  /// [QueryManager] that handles the queries.
   late QueryManager _queryManager;
 
   EntityManager(this.world) {
@@ -85,14 +88,24 @@ class EntityManager {
     _queryManager._onComponentAddedToEntity(entity, T);
   }
 
-  /// Remove and dispose a component by generic.
+  /// Remove and dispose a component by generics.
   void removeComponentFromEntity<T extends Component>(Entity entity) {
     assert(T != Component, 'An implemented Component was expected');
     assert(
       world.componentManager.components.contains(T),
       'Component $T has not been registered to the World',
     );
-    return _removeComponentFromEntity(entity, T);
+    return _markComponentForRemoval(entity, T);
+  }
+
+  /// Mark a component for removal.
+  void _markComponentForRemoval(Entity entity, Type componentType) {
+    if (!entity._componentTypes.contains(componentType) ||
+        entity._componentsToRemove.contains(componentType)) {
+      return;
+    }
+    _entitiesWithRemovedComponents.add(entity);
+    entity._componentsToRemove.add(componentType);
   }
 
   /// Remove and dispose a component.
@@ -109,7 +122,13 @@ class EntityManager {
   }
 
   /// Removes all the components the given entity has.
-  void removeAllComponentFromEntity(Entity entity) {
+  void _removeAllComponentFromEntity(Entity entity) {
+    // Make a copy so we can update this set while looping over it.
+    final componentsToRemove = entity._componentsToRemove.toSet();
+    for (final componentType in componentsToRemove) {
+      _removeComponentFromEntity(entity, componentType);
+    }
+
     // Make a copy so we can update this set while looping over it.
     final componentTypes = entity._componentTypes.toSet();
     for (final componentType in componentTypes) {
@@ -133,12 +152,12 @@ class EntityManager {
   /// Process all removed entities from the last execute cycle.
   void processRemovedEntities() {
     _entitiesToRemove.forEach(_releaseEntity);
-    _entitiesToRemove = [];
+    _entitiesToRemove.clear();
   }
 
   /// Fully release and reset an entity.
   void _releaseEntity(Entity entity) {
-    removeAllComponentFromEntity(entity);
+    _removeAllComponentFromEntity(entity);
     _queryManager._onEntityRemoved(entity);
 
     _entities.remove(entity);

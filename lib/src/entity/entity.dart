@@ -7,8 +7,10 @@ class Entity extends PoolObject<String> {
   /// The manager that handles all the entities.
   final EntityManager _entityManager;
 
-  /// Map of all the component added.
+  /// Map of all the components added.
   final Map<Type, Component> _components = {};
+
+  final List<Type> _componentsToRemove = [];
 
   /// Set of all the component types that are added.
   final Set<Type> _componentTypes = {};
@@ -28,7 +30,10 @@ class Entity extends PoolObject<String> {
   ///
   /// If the component is not registered, it will return `null`.
   T? get<T extends Component>() {
-    assert(T != Component, 'An implemented Component was expected');
+    assert(
+      T != Component || T != ValueComponent,
+      'An implemented Component was expected',
+    );
     return _components[T] as T?;
   }
 
@@ -37,19 +42,24 @@ class Entity extends PoolObject<String> {
 
   /// Add a component.
   void add<T extends Component<V>, V>([V? data]) {
-    assert(T != Component, 'An implemented Component was expected');
+    assert(
+      T != Component || T != ValueComponent,
+      'An implemented Component was expected',
+    );
     _entityManager.addComponentToEntity<T, V>(this, data);
   }
 
   /// Remove a component.
   void remove<T extends Component>() {
-    assert(T != Component, 'An implemented Component was expected');
+    assert(
+      T != Component || T != ValueComponent,
+      'An implemented Component was expected',
+    );
     _entityManager.removeComponentFromEntity<T>(this);
   }
 
   @override
   void init([String? name]) {
-    // id gets set by the entityManager.
     alive = true;
     this.name = name;
   }

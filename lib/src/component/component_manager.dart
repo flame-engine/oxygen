@@ -2,7 +2,7 @@ part of oxygen;
 
 typedef ComponentBuilder<T> = T Function();
 
-/// ObjectPool for a type of Component.
+/// An [ObjectPool] for a type of [Component].
 class ComponentPool<T extends Component> extends ObjectPool<T, dynamic> {
   final ComponentBuilder<T> componentBuilder;
 
@@ -14,7 +14,7 @@ class ComponentPool<T extends Component> extends ObjectPool<T, dynamic> {
 
 /// Manages all the components in a [World].
 class ComponentManager {
-  /// The World which this manager belongs to.
+  /// The [World] which this manager belongs to.
   final World world;
 
   /// List of registered components.
@@ -31,6 +31,7 @@ class ComponentManager {
   /// Register a component.
   ///
   /// If a component is already registered it will just return.
+  ///
   /// The [builder] is used for pooling.
   void registerComponent<T extends Component>(T Function() builder) {
     if (components.contains(T)) {

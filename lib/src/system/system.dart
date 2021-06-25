@@ -15,7 +15,7 @@ abstract class System {
   /// A System with a priority of 1 will go before a System with a priority of 2.
   ///
   /// It can't be changed at runtime.
-  int priority = 0;
+  final int priority;
 
   System({this.priority = 0});
 

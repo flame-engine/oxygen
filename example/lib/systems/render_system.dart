@@ -1,5 +1,8 @@
-import 'dart:io';
-
+import 'package:example/utils/color.dart';
+import 'package:example/components/color_component.dart';
+import 'package:example/components/name_component.dart';
+import 'package:example/utils/terminal.dart';
+import 'package:example/utils/vector2.dart';
 import 'package:oxygen/oxygen.dart';
 
 import '../components/render_component.dart';
@@ -18,16 +21,35 @@ class RenderSystem extends System {
 
   @override
   void execute(delta) {
-    stdout.write('\x1B[2J\x1B[0;0H');
-
     query.entities.forEach((entity) {
       final position = entity.get<PositionComponent>()!;
       final key = entity.get<RenderComponent>()!.value;
+      final color = entity.get<ColorComponent>()?.value ?? Colors.white;
 
-      stdout.write('\x1B[${position.y?.toInt()};${position.x?.toInt()}H');
-      stdout.write(key);
+      terminal
+        ..save()
+        ..translate(position.x!, position.y!)
+        ..draw(key!, foregroundColor: color);
+      if (entity.has<NameComponent>()) {
+        final name = entity.get<NameComponent>()!.value!;
+        terminal
+          ..translate(-(name.length ~/ 2), 1)
+          ..draw(name);
+      }
+      terminal.restore();
     });
 
-    stdout.write('\x1B[0;0HDelta: $delta');
+    terminal.draw('delta: $delta', foregroundColor: Colors.green);
+    terminal.draw(
+      'entites: ${world!.entities.length}',
+      foregroundColor: Colors.green,
+      position: Vector2(0, 1),
+    );
+    terminal.draw(
+      ' W A S D | Move Tim\n'
+      '   Space | Shoot',
+      foregroundColor: Colors.green,
+      position: terminal.viewport.bottomLeft.translate(0, -2),
+    );
   }
 }
