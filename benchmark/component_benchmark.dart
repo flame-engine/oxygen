@@ -1,21 +1,8 @@
 import 'package:oxygen/oxygen.dart';
 import 'package:benchmark/benchmark.dart';
 
-class Test100Component extends Component<void> {
-  @override
-  void init([void data]) {}
-
-  @override
-  void reset() {}
-}
-
-class Test50Component extends Component<void> {
-  @override
-  void init([void data]) {}
-
-  @override
-  void reset() {}
-}
+import 'utils/components/test_100_component.dart';
+import 'utils/components/test_50_component.dart';
 
 void main() {
   group('Component', () {
@@ -53,7 +40,7 @@ void main() {
 
       group('100%', () {
         benchmark('Iterate over 100% entities without getting', () {
-          for (final entity in query100!.entities) {}
+          for (final _ in query100!.entities) {}
         });
 
         benchmark('Iterate over 100% entities with getting', () {
@@ -65,7 +52,7 @@ void main() {
 
       group('50%', () {
         benchmark('Iterate over 50% entities without getting', () {
-          for (final entity in query50!.entities) {}
+          for (final _ in query50!.entities) {}
         });
 
         benchmark('Iterate over 50% entities with getting', () {

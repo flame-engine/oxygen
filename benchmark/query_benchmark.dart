@@ -1,21 +1,8 @@
 import 'package:oxygen/oxygen.dart';
 import 'package:benchmark/benchmark.dart';
 
-class Test100Component extends Component<void> {
-  @override
-  void init([void data]) {}
-
-  @override
-  void reset() {}
-}
-
-class Test50Component extends Component<void> {
-  @override
-  void init([void data]) {}
-
-  @override
-  void reset() {}
-}
+import 'utils/components/test_100_component.dart';
+import 'utils/components/test_50_component.dart';
 
 void main() {
   group('Query', () {
