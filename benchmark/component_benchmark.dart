@@ -14,6 +14,9 @@ void main() {
       Query? query100;
       Query? query50;
 
+      ComponentHandle<Test100Component>? handle100;
+      ComponentHandle<Test50Component>? handle50;
+
       setUp(() {
         world = World();
         world!.registerComponent(() => Test100Component());
@@ -29,8 +32,11 @@ void main() {
         }
         queryManager = QueryManager(world!.entityManager);
 
-        query100 = queryManager?.createQuery([Has<Test100Component>()]);
-        query50 = queryManager?.createQuery([Has<Test50Component>()]);
+        query100 = queryManager!.createQuery([Has<Test100Component>()]);
+        handle100 = world!.componentManager.ref<Test100Component>();
+
+        query50 = queryManager!.createQuery([Has<Test50Component>()]);
+        handle50 = world!.componentManager.ref<Test50Component>();
       });
 
       tearDown(() {
@@ -39,25 +45,25 @@ void main() {
       });
 
       group('100%', () {
-        benchmark('Iterate over 100% entities without getting', () {
+        benchmark('Iterate over 100% of the entities without getting', () {
           for (final _ in query100!.entities) {}
         });
 
-        benchmark('Iterate over 100% entities with getting', () {
+        benchmark('Iterate over 100% of the entities with getting', () {
           for (final entity in query100!.entities) {
-            entity.get<Test100Component>();
+            entity.get(handle100!);
           }
         });
       });
 
       group('50%', () {
-        benchmark('Iterate over 50% entities without getting', () {
+        benchmark('Iterate over 50% of the entities without getting', () {
           for (final _ in query50!.entities) {}
         });
 
-        benchmark('Iterate over 50% entities with getting', () {
+        benchmark('Iterate over 50% of the entities with getting', () {
           for (final entity in query50!.entities) {
-            entity.get<Test50Component>();
+            entity.get(handle50!);
           }
         });
       });

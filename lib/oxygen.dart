@@ -5,6 +5,7 @@ import 'dart:collection';
 
 import 'package:meta/meta.dart';
 
+part 'src/component/component_handle.dart';
 part 'src/component/component_manager.dart';
 part 'src/component/component.dart';
 part 'src/component/value_component.dart';

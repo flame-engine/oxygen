@@ -12,7 +12,7 @@ void main() {
 
       benchmark('World with 100000 entities', () {
         for (var i = 0; i < 100000; i++) {
-          world?.createEntity();
+          world!.createEntity();
         }
       });
     });

@@ -20,6 +20,10 @@ class ComponentManager {
   /// List of registered components.
   final List<Type> components = [];
 
+  final Map<Type, int> _componentIds = {};
+
+  int _componentId = 0;
+
   /// Map of [ObjectPool]s for each kind of registered [Component].
   final Map<Type, ComponentPool> _componentPool = {};
 
@@ -37,12 +41,16 @@ class ComponentManager {
     if (components.contains(T)) {
       return;
     }
-
+    _componentIds[T] = _componentId++;
     components.add(T);
     _componentPool[T] = ComponentPool<T>(builder);
   }
 
   ComponentPool<T> getComponentPool<T extends Component<V>, V>() {
     return _componentPool[T] as ComponentPool<T>;
+  }
+
+  ComponentHandle<T> ref<T extends Component>() {
+    return ComponentHandle<T>(_componentIds[T]!);
   }
 }

@@ -8,7 +8,10 @@ class EntityPool extends ObjectPool<Entity, String> {
   EntityPool(this.entityManager) : super();
 
   @override
-  Entity builder() => Entity(entityManager);
+  Entity builder() => Entity(
+        entityManager,
+        entityManager.world.componentManager._componentId,
+      );
 }
 
 /// Manages all the entities in a [World].
@@ -84,7 +87,7 @@ class EntityManager {
     final component = componentPool.acquire(data);
 
     entity._componentTypes.add(T);
-    entity._components[T] = component;
+    entity._components[world.componentManager._componentIds[T]!] = component;
     _queryManager._onComponentAddedToEntity(entity, T);
   }
 
@@ -115,7 +118,9 @@ class EntityManager {
     }
 
     entity._componentTypes.remove(componentType);
-    final component = entity._components.remove(componentType);
+    final component = entity._components.removeAt(
+      world.componentManager._componentIds[componentType]!,
+    );
     component?.dispose();
 
     _queryManager._onComponentRemovedFromEntity(entity, componentType);

@@ -28,7 +28,7 @@ abstract class System {
     world = null;
   }
 
-  /// Create a new Query to filter entites.
+  /// Create a new Query to filter entities.
   Query createQuery(Iterable<Filter> filters) =>
       world!.entityManager._queryManager.createQuery(filters);
 

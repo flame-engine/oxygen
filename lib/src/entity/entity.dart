@@ -8,7 +8,7 @@ class Entity extends PoolObject<String> {
   final EntityManager _entityManager;
 
   /// Map of all the components added.
-  final Map<Type, Component> _components = {};
+  final List<Component?> _components;
 
   final List<Type> _componentsToRemove = [];
 
@@ -24,17 +24,19 @@ class Entity extends PoolObject<String> {
   /// Optional name to identify an entity by.
   String? name;
 
-  Entity(this._entityManager) : id = _entityManager._nextEntityId++;
+  Entity(this._entityManager, int componentLength)
+      : id = _entityManager._nextEntityId++,
+        _components = List.filled(componentLength, null);
 
   /// Retrieves a Component by Type.
   ///
   /// If the component is not registered, it will return `null`.
-  T? get<T extends Component>() {
+  T? get<T extends Component>(ComponentHandle<T> handle) {
     assert(
       T != Component || T != ValueComponent,
       'An implemented Component was expected',
     );
-    return _components[T] as T?;
+    return _components[handle.id] as T?;
   }
 
   /// Check if a component is added.

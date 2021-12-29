@@ -31,12 +31,16 @@ void main() {
         queryManager = null;
       });
 
-      benchmark('creating a Query that matches 100% of all the entities', () {
-        queryManager?.createQuery([Has<Test100Component>()]);
+      group('100%', () {
+        benchmark('creating a Query that matches 100% of all the entities', () {
+          queryManager!.createQuery([Has<Test100Component>()]);
+        });
       });
 
-      benchmark('creating a Query that matches 50% of all the entities', () {
-        queryManager?.createQuery([Has<Test50Component>()]);
+      group('50%', () {
+        benchmark('creating a Query that matches 50% of all the entities', () {
+          queryManager!.createQuery([Has<Test50Component>()]);
+        });
       });
     });
   });
