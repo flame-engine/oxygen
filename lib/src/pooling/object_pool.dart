@@ -32,7 +32,7 @@ abstract class ObjectPool<T extends PoolObject<V>, V> {
     }
     final object = _pool.removeLast();
     assert(
-      data == null || data is V,
+      data == null,
       '$T expects an instance of $V but received ${data.runtimeType}',
     );
     return object..init(data);

@@ -10,7 +10,7 @@ void main() {
 
       tearDownEach(() => world = null);
 
-      benchmark('World with 100000 entities', () {
+      benchmark('World with 100k entities', () {
         for (var i = 0; i < 100000; i++) {
           world!.createEntity();
         }
@@ -18,7 +18,7 @@ void main() {
     });
 
     group('With world creation', () {
-      benchmark('World with 100000 entities', () {
+      benchmark('World with 100k entities', () {
         final world = World();
         for (var i = 0; i < 100000; i++) {
           world.createEntity();

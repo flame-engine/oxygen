@@ -70,7 +70,7 @@ class Entity extends PoolObject<String> {
   void reset() {
     id = null;
     alive = false;
-    _components.clear();
+    _components.clear(); // TODO: this resets the length.
     _componentTypes.clear();
   }
 

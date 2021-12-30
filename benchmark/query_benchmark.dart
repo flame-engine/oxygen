@@ -6,7 +6,7 @@ import 'utils/components/test_50_component.dart';
 
 void main() {
   group('Query', () {
-    group('With 100000 entities', () {
+    group('With 100k entities', () {
       World? world;
 
       QueryManager? queryManager;
