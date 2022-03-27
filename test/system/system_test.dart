@@ -42,7 +42,7 @@ class SystemD extends System {
 
 void main() {
   group('System', () {
-    group('registerSystem -', () {
+    group('registerSystem', () {
       test('Priority should be in the right order', () {
         final systemA = SystemA();
         final systemB = SystemB();
