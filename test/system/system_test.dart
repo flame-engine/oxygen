@@ -80,7 +80,7 @@ void main() {
         final world = World()..registerSystem(system);
 
         expect(
-          () => world..registerSystem(system),
+          () => world.registerSystem(system),
           throwsA(isA<AssertionError>()),
         );
       });
