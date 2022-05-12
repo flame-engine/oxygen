@@ -1,4 +1,3 @@
-import 'dart:collection';
 import 'dart:typed_data';
 
 import 'package:meta/meta.dart';
@@ -58,7 +57,7 @@ class World implements MaskDelegate {
         hashedFilters = <int, Filter>{},
         allFilters = <Filter>[],
         _destroyed = false {
-    // TODO: capacity maskPool
+    // TODO(danCrane): capacity maskPool
     _maskPool = MaskPool(64, () => Mask(this));
   }
 

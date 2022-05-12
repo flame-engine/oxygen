@@ -170,7 +170,7 @@ void main() {
       });
     });
 
-    // TODO(dan): complete the tests
+    // TODO(danCrane): complete the tests
     group('onEntityChangeInternal', () {});
 
     group('checkFilter', () {
@@ -240,7 +240,7 @@ void main() {
       });
     });
 
-    // TODO(dan): complete the tests
+    // TODO(danCrane): complete the tests
     group('isMaskCompatible', () {
       test('should be returned true when entity is compatible with mask', () {
         final world = World();
@@ -280,7 +280,7 @@ void main() {
       );
     });
 
-    // TODO(dan): complete the tests
+    // TODO(danCrane): complete the tests
     group('isMaskCompatibleWithout', () {
       test('should be returned true when entity is compatible with mask', () {
         final world = World();

@@ -45,7 +45,7 @@ class Filter extends IterableBase<Entity> {
   ])  : _mask = mask,
         _denseEntities = Uint32List(denseCapacity),
         _sparseEntities = Uint32List(sparseCapacity),
-        // TODO! set size of operations
+        // TODO(danCrane): set size of operations
         operations = List.generate(512, (_) => FilterOperation());
 
   @internal
