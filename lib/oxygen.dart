@@ -1,20 +1,12 @@
 /// A lightweight Entity Component System written in Dart.
 library oxygen;
 
-import 'dart:collection';
-
-import 'package:meta/meta.dart';
-
-part 'src/component/component_manager.dart';
-part 'src/component/component.dart';
-part 'src/component/value_component.dart';
-part 'src/entity/entity_manager.dart';
-part 'src/entity/entity.dart';
-part 'src/pooling/object_pool.dart';
-part 'src/pooling/pool_object.dart';
-part 'src/query/filter.dart';
-part 'src/query/query_manager.dart';
-part 'src/query/query.dart';
-part 'src/system/system_manager.dart';
-part 'src/system/system.dart';
-part 'src/world.dart';
+export 'src/components/component.dart';
+export 'src/components/component_pool.dart';
+export 'src/entity/entity.dart';
+export 'src/entity/entity_data.dart';
+export 'src/filter/filter.dart';
+export 'src/mask/mask.dart';
+export 'src/system/system.dart';
+export 'src/world.dart';
+export 'src/world_config.dart';
