@@ -1,5 +1,5 @@
-import 'package:oxygen/oxygen.dart';
 import 'package:benchmark/benchmark.dart';
+import 'package:oxygen/oxygen.dart';
 
 void main() {
   group('World', () {
