@@ -7,14 +7,14 @@ class Test50Component extends Component {}
 
 void main() {
   group('Filter', () {
-    group('With 1kk entities', () {
+    group('With 100k entities', () {
       World? world;
 
       setUp(() {
         world = World();
         final pool100 = world!.registerPool(Test100Component.new);
         final pool50 = world!.registerPool(Test50Component.new);
-        for (var i = 0; i < 1000000; i++) {
+        for (var i = 0; i < 100000; i++) {
           final entity = world!.createEntity();
 
           pool100.add(entity);

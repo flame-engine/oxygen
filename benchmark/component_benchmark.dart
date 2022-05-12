@@ -7,7 +7,7 @@ import 'package:oxygen/oxygen.dart';
 
 void main() {
   group('Component', () {
-    group('With 1kk entities', () {
+    group('With 100k entities', () {
       World? world;
 
       Filter? filter100;
@@ -21,7 +21,7 @@ void main() {
         pool100 = world!.registerPool(Test100Component.new);
         pool50 = world!.registerPool(Test50Component.new);
 
-        for (var i = 0; i < 1000000; i++) {
+        for (var i = 0; i < 100000; i++) {
           final entity = world!.createEntity();
 
           pool100!.add(entity);
