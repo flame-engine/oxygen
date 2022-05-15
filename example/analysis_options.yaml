@@ -1,0 +1,6 @@
+include: package:flame_lint/analysis_options.yaml
+
+analyzer:
+  errors: 
+    prefer_relative_imports: false
+    always_use_package_imports: true
