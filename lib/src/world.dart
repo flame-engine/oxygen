@@ -134,10 +134,12 @@ class World implements MaskDelegate {
     // Delete components.
     if (entityData.componentsCount > 0) {
       var index = 0;
+      // TODO(dan): need more tests
       while (entityData.componentsCount > 0 && index < _poolsCount) {
         if (_pools[index].has(entity)) {
-          _pools[index++].delete(entity);
+          _pools[index].delete(entity);
         }
+        index++;
       }
 
       return;
