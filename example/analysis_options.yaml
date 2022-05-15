@@ -4,3 +4,4 @@ analyzer:
   errors: 
     prefer_relative_imports: false
     always_use_package_imports: true
+    prefer_foreach: false
