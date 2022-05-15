@@ -1,8 +1,8 @@
-import 'package:example/utils/keyboard.dart';
-import 'package:example/utils/terminal.dart';
+import 'keyboard.dart';
+import 'terminal.dart';
 
-const TARGET_FPS = 120;
-const FRAME_TIME = 1000 ~/ TARGET_FPS;
+const kTargetFps = 120;
+const kFrameTime = 1000 ~/ kTargetFps;
 
 abstract class Game {
   final Stopwatch _stopwatch;
@@ -22,14 +22,15 @@ abstract class Game {
     final elapsed = current - _previous;
     _previous = current;
 
-    update(elapsed / FRAME_TIME);
+    update(elapsed / kFrameTime);
 
     keyboard.clear();
 
     terminal.clear();
     terminal.render();
 
-    Future.delayed(Duration(milliseconds: FRAME_TIME)).then((value) => loop());
+    Future<void>.delayed(const Duration(milliseconds: kFrameTime))
+        .then((_) => loop());
   }
 
   void onLoad();

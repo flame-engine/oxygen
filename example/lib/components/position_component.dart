@@ -1,7 +1,8 @@
 import 'package:example/utils/vector2.dart';
+
 import 'package:oxygen/oxygen.dart';
 
-class PositionComponent extends Component<Vector2> {
+class PositionComponent extends Component {
   int? x;
   int? y;
 
