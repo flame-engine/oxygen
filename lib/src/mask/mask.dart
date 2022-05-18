@@ -34,8 +34,8 @@ class Mask {
         includeList = Uint8List(8),
         excludeList = Uint8List(4);
 
-  Mask include<T extends Component>() {
-    final poolId = _delegate.getPool<T>().id;
+  Mask include<T extends Component>(ComponentBuilder<T> componentBuilder) {
+    final poolId = _delegate.getPool<T>(componentBuilder).id;
 
     assert(
       !includeList.containsValue(poolId, includeCount),
@@ -55,8 +55,8 @@ class Mask {
     return this;
   }
 
-  Mask exclude<T extends Component>() {
-    final poolId = _delegate.getPool<T>().id;
+  Mask exclude<T extends Component>(ComponentBuilder<T> componentBuilder) {
+    final poolId = _delegate.getPool<T>(componentBuilder).id;
 
     assert(
       !includeList.containsValue(poolId, includeCount),

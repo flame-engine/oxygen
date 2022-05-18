@@ -5,7 +5,8 @@ import '../entity/entity.dart';
 import '../helpers.dart';
 import '../world.dart';
 
-typedef ComponentBuilder<T> = T Function();
+typedef ComponentBuilder<T extends Component> = T Function();
+typedef PoolBuilder<T extends Component> = ComponentPool<T> Function();
 
 /// A ComponentPool is a way to store data for an [Entity].
 ///
@@ -41,16 +42,17 @@ class ComponentPool<T extends Component> {
     World world,
     ComponentBuilder<T> componentBuilder,
     int id,
-    int capacity,
+    int entities,
+    int recycledEntities,
   )   : _world = world,
         _componentBuilder = componentBuilder,
         _id = id,
         _components = List.generate(
-          capacity + 1,
+          entities + 1,
           (index) => componentBuilder(),
         ),
-        _entityToComponentIndex = Uint32List(capacity),
-        _recycledComponentIndexes = Uint32List(capacity);
+        _entityToComponentIndex = Uint32List(entities),
+        _recycledComponentIndexes = Uint32List(recycledEntities);
 
   T add(Entity entity) {
     assert(_world.isEntityAliveInternal(entity), 'Entity was removed.');

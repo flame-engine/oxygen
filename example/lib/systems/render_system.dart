@@ -11,13 +11,13 @@ class RenderSystem implements RunSystem {
   @override
   void run(Systems systems, double dt) {
     final filter = systems.world
-        .filter<RenderComponent>()
-        .include<PositionComponent>()
+        .filter(RenderComponent.new)
+        .include(PositionComponent.new)
         .end();
-    final positionPool = systems.world.getPool<PositionComponent>();
-    final renderPool = systems.world.getPool<RenderComponent>();
-    final colorPool = systems.world.getPool<ColorComponent>();
-    final namePool = systems.world.getPool<NameComponent>();
+    final positionPool = systems.world.getPool(PositionComponent.new);
+    final renderPool = systems.world.getPool(RenderComponent.new);
+    final colorPool = systems.world.getPool(ColorComponent.new);
+    final namePool = systems.world.getPool(NameComponent.new);
 
     for (final entity in filter) {
       final position = positionPool.get(entity);

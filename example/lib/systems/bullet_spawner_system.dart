@@ -16,19 +16,19 @@ class BulletSpawnerSystem implements RunSystem, InitSystem {
 
   @override
   void init(Systems systems) {
-    _positionPool = systems.world.getPool<PositionComponent>();
-    _directionPool = systems.world.getPool<DirectionComponent>();
-    _bulletMovePool = systems.world.getPool<BulletMoveComponent>();
-    _bulletPool = systems.world.getPool<BulletComponent>();
-    _renderPool = systems.world.getPool<RenderComponent>();
+    _positionPool = systems.world.getPool(PositionComponent.new);
+    _directionPool = systems.world.getPool(DirectionComponent.new);
+    _bulletMovePool = systems.world.getPool(BulletMoveComponent.new);
+    _bulletPool = systems.world.getPool(BulletComponent.new);
+    _renderPool = systems.world.getPool(RenderComponent.new);
   }
 
   @override
   void run(Systems systems, double dt) {
     final filter = systems.world
-        .filter<PositionComponent>()
-        .include<AtackComponent>()
-        .include<DirectionComponent>()
+        .filter(PositionComponent.new)
+        .include(AtackComponent.new)
+        .include(DirectionComponent.new)
         .end();
 
     for (final entity in filter) {

@@ -25,7 +25,7 @@ class World implements MaskDelegate {
   final List<ComponentPool> _pools;
   int _poolsCount;
   @internal
-  final Map<Type, ComponentPool> poolCached;
+  final Map<ComponentBuilder, ComponentPool> poolCached;
   @internal
   final Map<int, Filter> hashedFilters;
   @internal
@@ -50,7 +50,7 @@ class World implements MaskDelegate {
         _entitiesCount = 0,
         recycledEntitiesCount = 0,
         _pools = <ComponentPool>[],
-        poolCached = <Type, ComponentPool>{},
+        poolCached = <ComponentBuilder, ComponentPool>{},
         filtersByIncludedComponents = List.generate(_config.pools, (_) => []),
         filtersByExcludedComponents = List.generate(_config.pools, (_) => []),
         _poolsCount = 0,
@@ -61,23 +61,25 @@ class World implements MaskDelegate {
     _maskPool = MaskPool(64, () => Mask(this));
   }
 
-  ComponentPool<T> registerPool<T extends Component>(T Function() generator) {
-    return poolCached.putIfAbsent(T, () {
+  /// Returns the [ComponentPool].
+  @override
+  ComponentPool<T> getPool<T extends Component>(
+    ComponentBuilder<T> compoenentBuilder,
+  ) {
+    return poolCached.putIfAbsent(compoenentBuilder, () {
       final pool = ComponentPool<T>(
         this,
-        generator,
+        compoenentBuilder,
         _poolsCount,
-        _config.poolCapacity,
+        entities.length,
+        _config.poolRecycled,
       );
 
+      // TODO(dan): need test
       if (filtersByIncludedComponents.length == _poolsCount ||
           filtersByExcludedComponents.length == _poolsCount) {
-        filtersByIncludedComponents.addAll(
-          Iterable.generate(_config.pools, (_) => []),
-        );
-        filtersByExcludedComponents.addAll(
-          Iterable.generate(_config.pools, (_) => []),
-        );
+        filtersByIncludedComponents.resize(_poolsCount);
+        filtersByExcludedComponents.resize(_poolsCount);
       }
 
       _pools.add(pool);
@@ -85,17 +87,6 @@ class World implements MaskDelegate {
 
       return pool;
     }) as ComponentPool<T>;
-  }
-
-  /// Returns the registered [ComponentPool].
-  @override
-  ComponentPool<T> getPool<T extends Component>() {
-    assert(
-      poolCached[T] != null,
-      'Pool of $T does`t registered',
-    );
-
-    return poolCached[T]! as ComponentPool<T>;
   }
 
   Entity createEntity() {
@@ -152,7 +143,9 @@ class World implements MaskDelegate {
     recycledEntities[recycledEntitiesCount++] = entity;
   }
 
-  Mask filter<T extends Component>() => _maskPool.take()..include<T>();
+  Mask filter<T extends Component>(ComponentBuilder<T> componentBuilder) {
+    return _maskPool.take()..include<T>(componentBuilder);
+  }
 
   void destroy() {
     _destroyed = true;

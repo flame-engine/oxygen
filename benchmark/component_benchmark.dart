@@ -18,8 +18,8 @@ void main() {
 
       setUp(() {
         world = World();
-        pool100 = world!.registerPool(Test100Component.new);
-        pool50 = world!.registerPool(Test50Component.new);
+        pool100 = world!.getPool(Test100Component.new);
+        pool50 = world!.getPool(Test50Component.new);
 
         for (var i = 0; i < 100000; i++) {
           final entity = world!.createEntity();
@@ -30,8 +30,8 @@ void main() {
           }
         }
 
-        filter100 = world!.filter<Test100Component>().end();
-        filter50 = world!.filter<Test50Component>().end();
+        filter100 = world!.filter(Test100Component.new).end();
+        filter50 = world!.filter(Test50Component.new).end();
       });
 
       tearDown(() {

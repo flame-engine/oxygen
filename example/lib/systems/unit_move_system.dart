@@ -10,16 +10,16 @@ class UnitMoveSystem implements RunSystem, InitSystem {
 
   @override
   void init(Systems systems) {
-    _positionPool = systems.world.getPool<PositionComponent>();
-    _directionPool = systems.world.getPool<DirectionComponent>();
+    _positionPool = systems.world.getPool(PositionComponent.new);
+    _directionPool = systems.world.getPool(DirectionComponent.new);
   }
 
   @override
   void run(Systems systems, double delta) {
     final filter = systems.world
-        .filter<DirectionComponent>()
-        .include<PositionComponent>()
-        .include<UnitMoveComponent>()
+        .filter(DirectionComponent.new)
+        .include(PositionComponent.new)
+        .include(UnitMoveComponent.new)
         .end();
 
     for (final entity in filter) {

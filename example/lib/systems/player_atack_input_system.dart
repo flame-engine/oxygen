@@ -9,12 +9,12 @@ class PlayerAtackInputSystem implements RunSystem, InitSystem {
 
   @override
   void init(Systems systems) {
-    _atackPool = systems.world.getPool<AtackComponent>();
+    _atackPool = systems.world.getPool(AtackComponent.new);
   }
 
   @override
   void run(Systems systems, double dt) {
-    final filter = systems.world.filter<PlayerComponent>().end();
+    final filter = systems.world.filter(PlayerComponent.new).end();
 
     for (final entity in filter) {
       if (keyboard.isPressed(Key.space)) {

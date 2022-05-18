@@ -11,15 +11,15 @@ class PlayerInitSystem implements InitSystem {
   @override
   void init(Systems systems) {
     final player = systems.world.createEntity();
-    systems.world.getPool<PlayerComponent>().add(player);
-    systems.world.getPool<NameComponent>().add(player).init('Tim');
-    systems.world.getPool<RenderComponent>().add(player).init('🐥');
+    systems.world.getPool(PlayerComponent.new).add(player);
+    systems.world.getPool(NameComponent.new).add(player).init('Tim');
+    systems.world.getPool(RenderComponent.new).add(player).init('🐥');
     systems.world
-        .getPool<DirectionComponent>()
+        .getPool(DirectionComponent.new)
         .add(player)
         .init(Direction.right);
     systems.world
-        .getPool<PositionComponent>()
+        .getPool(PositionComponent.new)
         .add(player)
         .init(terminal.viewport.center);
   }

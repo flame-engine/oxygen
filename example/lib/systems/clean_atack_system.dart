@@ -7,12 +7,12 @@ class CleanAtackSystem implements RunSystem, InitSystem {
 
   @override
   void init(Systems systems) {
-    _atackPool = systems.world.getPool<AtackComponent>();
+    _atackPool = systems.world.getPool(AtackComponent.new);
   }
 
   @override
   void run(Systems systems, double delta) {
-    final filter = systems.world.filter<AtackComponent>().end();
+    final filter = systems.world.filter(AtackComponent.new).end();
 
     for (final entity in filter) {
       _atackPool.delete(entity);

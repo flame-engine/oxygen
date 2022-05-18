@@ -10,12 +10,12 @@ class CleanBulletSystem implements RunSystem, InitSystem {
 
   @override
   void init(Systems systems) {
-    _positionPool = systems.world.getPool<PositionComponent>();
+    _positionPool = systems.world.getPool(PositionComponent.new);
   }
 
   @override
   void run(Systems systems, double delta) {
-    final filter = systems.world.filter<BulletComponent>().end();
+    final filter = systems.world.filter(BulletComponent.new).end();
 
     for (final entity in filter) {
       final position = _positionPool.get(entity);

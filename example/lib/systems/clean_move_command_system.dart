@@ -6,12 +6,12 @@ class CleanUnitMoveSystem implements RunSystem, InitSystem {
 
   @override
   void init(Systems systems) {
-    _moveCommandPool = systems.world.getPool<UnitMoveComponent>();
+    _moveCommandPool = systems.world.getPool(UnitMoveComponent.new);
   }
 
   @override
   void run(Systems systems, double delta) {
-    final filter = systems.world.filter<UnitMoveComponent>().end();
+    final filter = systems.world.filter(UnitMoveComponent.new).end();
 
     for (final entity in filter) {
       _moveCommandPool.delete(entity);

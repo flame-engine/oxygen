@@ -25,7 +25,7 @@ void main() {
       });
 
       benchmark('with 100k instances', () {
-        ComponentPool<TestObject>(world, TestObject.new, 0, 100000);
+        ComponentPool<TestObject>(world, TestObject.new, 0, 100000, 100000);
       });
     });
 
@@ -36,7 +36,7 @@ void main() {
 
       setUp(() {
         world = World();
-        pool = world.registerPool(TestObject.new);
+        pool = world.getPool(TestObject.new);
         for (var i = 0; i <= 100000; i++) {
           entities.add(world.createEntity());
         }

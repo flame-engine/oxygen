@@ -43,15 +43,29 @@ void main() {
       test('should returned pool', () {
         final world = World()..registerPool(_Component1.new);
 
-        expect(world.getPool<_Component1>(), isA<ComponentPool<_Component1>>());
+        expect(
+          world.getPool(_Component1.new),
+          isA<ComponentPool<_Component1>>(),
+        );
       });
 
       test(
         'should be throw assert error when pool is not registered',
         () {
-          final world = World();
+          final world = World(Config(pools: 1, entities: 1));
 
-          expect(world.getPool<_Component1>, throwsA(isA<AssertionError>()));
+          world.getPool(_Component1.new);
+          world.getPool(_Component2.new);
+          world.getPool(_Component3.new);
+          world.getPool(_Component4.new);
+          world.getPool(_Component5.new);
+          world.getPool(_Component6.new);
+          world.getPool(_Component7.new);
+          world.getPool(_Component8.new);
+
+
+          // expect(world.getPool<_Component1>, throwsA(isA<AssertionError>()));
+          // expect(world.getPool<_Component1>, throwsA(isA<AssertionError>()));
         },
       );
     });
@@ -185,17 +199,17 @@ void main() {
           world.registerPool(_Component4.new);
 
           final filter = world
-              .filter<_Component1>()
-              .include<_Component2>()
-              .exclude<_Component3>()
-              .exclude<_Component4>()
+              .filter<_Component1>(_Component1.new)
+              .include<_Component2>(_Component2.new)
+              .exclude<_Component3>(_Component3.new)
+              .exclude<_Component4>(_Component4.new)
               .end();
 
           final filter2 = world
-              .filter<_Component2>()
-              .include<_Component1>()
-              .exclude<_Component4>()
-              .exclude<_Component3>()
+              .filter<_Component2>(_Component2.new)
+              .include<_Component1>(_Component1.new)
+              .exclude<_Component4>(_Component4.new)
+              .exclude<_Component3>(_Component3.new)
               .end();
 
           expect(filter, equals(filter2));
@@ -212,7 +226,7 @@ void main() {
           ..add(e1)
           ..add(e3);
 
-        final filter = world.filter<_Component1>().end();
+        final filter = world.filter<_Component1>(_Component1.new).end();
 
         expect(filter, hasLength(2));
         expect(filter.denseEntities[0], equals(e1));
@@ -226,7 +240,10 @@ void main() {
 
         expect(world.filtersByIncludedComponents[pool1.id], isEmpty);
         expect(world.filtersByExcludedComponents[pool2.id], isEmpty);
-        final filter = world.filter<_Component1>().exclude<_Component2>().end();
+        final filter = world
+            .filter<_Component1>(_Component1.new)
+            .exclude<_Component2>(_Component2.new)
+            .end();
         expect(world.filtersByIncludedComponents[pool1.id], hasLength(1));
         expect(
           world.filtersByIncludedComponents[pool1.id].first,
@@ -310,3 +327,7 @@ class _Component2 extends Component {}
 class _Component3 extends Component {}
 
 class _Component4 extends Component {}
+class _Component5 extends Component {}
+class _Component6 extends Component {}
+class _Component7 extends Component {}
+class _Component8 extends Component {}

@@ -12,8 +12,8 @@ void main() {
 
       setUp(() {
         world = World();
-        final pool100 = world!.registerPool(Test100Component.new);
-        final pool50 = world!.registerPool(Test50Component.new);
+        final pool100 = world!.getPool(Test100Component.new);
+        final pool50 = world!.getPool(Test50Component.new);
         for (var i = 0; i < 100000; i++) {
           final entity = world!.createEntity();
 
@@ -29,11 +29,11 @@ void main() {
       });
 
       benchmark('creating a Filter that matches 100% of all the entities', () {
-        world!.filter<Test100Component>().end();
+        world!.filter(Test100Component.new).end();
       });
 
       benchmark('creating a Filter that matches 50% of all the entities', () {
-        world!.filter<Test50Component>().end();
+        world!.filter(Test50Component.new).end();
       });
     });
   });

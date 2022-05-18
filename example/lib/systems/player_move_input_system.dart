@@ -11,15 +11,15 @@ class PlayerMoveInputSystem implements RunSystem, InitSystem {
 
   @override
   void init(Systems systems) {
-    _moveCommandPool = systems.world.getPool<UnitMoveComponent>();
-    _directionPool = systems.world.getPool<DirectionComponent>();
+    _moveCommandPool = systems.world.getPool(UnitMoveComponent.new);
+    _directionPool = systems.world.getPool(DirectionComponent.new);
   }
 
   @override
   void run(Systems systems, double dt) {
     final filter = systems.world
-        .filter<PlayerComponent>()
-        .include<DirectionComponent>()
+        .filter(PlayerComponent.new)
+        .include(DirectionComponent.new)
         .end();
 
     for (final entity in filter) {

@@ -1,6 +1,8 @@
 import 'dart:typed_data';
 import 'package:meta/meta.dart';
 
+import 'filter/filter.dart';
+
 @internal
 extension ResizeUint8List on Uint8List {
   Uint8List resize([int? capacity]) {
@@ -56,4 +58,11 @@ extension MaskList on Uint8List {
 
   Uint8List sortTo(int end) =>
       (BytesBuilder()..add(getRange(0, end).toList()..sort())).takeBytes();
+}
+
+@internal
+extension FiltersByComponents on List<List<Filter>> {
+  void resize(int? capacity) {
+    addAll(Iterable.generate(capacity ?? length, (_) => []));
+  }
 }

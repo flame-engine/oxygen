@@ -1,5 +1,6 @@
 import '../filter/filter.dart';
 import '../world.dart';
+import '../world_config.dart';
 
 /// Systems contain the logic for components.
 ///
@@ -25,13 +26,15 @@ abstract class DestroySystem extends BaseSystem {
 
 /// Manages all registered systems.
 class Systems {
-  final World _world;
+  final World _defaultWorld;
+  final _worlds = <String, World>{};
   final _allSystems = <BaseSystem>[];
   final _runSystems = <RunSystem>[];
+  var _runSystemsCount = 0;
 
-  World get world => _world;
+  World get world => _defaultWorld;
 
-  Systems(World world) : _world = world;
+  Systems(World world) : _defaultWorld = world;
 
   void init() {
     for (final system in _allSystems) {
@@ -44,9 +47,18 @@ class Systems {
     }
   }
 
-  void add(BaseSystem system) {
-    _allSystems.add(system);
-  }
+  void add(BaseSystem system) => _allSystems.add(system);
+
+  /// It's useful to use a separate world for short-lived entity-events, since
+  /// each world has a size of [Config.entities] * [Config.pools]. That is,
+  /// if you have 100k entities for units in a world, and you suddenly create
+  /// one entity-events with a "Click" component, a pool with a huge size will
+  /// be created for that component, which will eventually lead to irrational
+  /// memory allocation.
+  void addWorld(String name, World world) =>
+      _worlds.putIfAbsent(name, () => world);
+
+  World getWorld(String name) => _worlds[name] ?? _defaultWorld;
 
   void run(double dt) {
     final length = _runSystems.length;
