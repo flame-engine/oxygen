@@ -7,3 +7,12 @@ abstract class Component {
   void init() {}
   void reset() {}
 }
+
+abstract class ComponentValue<T> extends Component {
+  T? value;
+
+  @override
+  void init() {}
+  @override
+  void reset() {}
+}
