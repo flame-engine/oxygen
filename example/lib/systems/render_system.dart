@@ -1,49 +1,51 @@
-import 'package:example/utils/color.dart';
 import 'package:example/components/color_component.dart';
 import 'package:example/components/name_component.dart';
+import 'package:example/components/position_component.dart';
+import 'package:example/components/render_component.dart';
+import 'package:example/utils/color.dart';
 import 'package:example/utils/terminal.dart';
 import 'package:example/utils/vector2.dart';
 import 'package:oxygen/oxygen.dart';
 
-import '../components/render_component.dart';
-import '../components/position_component.dart';
-
-class RenderSystem extends System {
-  late Query query;
-
+class RenderSystem implements RunSystem {
   @override
-  void init() {
-    query = createQuery([
-      Has<RenderComponent>(),
-      Has<PositionComponent>(),
-    ]);
-  }
+  void run(Systems systems, double dt) {
+    final filter = systems.world
+        .filter(RenderComponent.new)
+        .include(PositionComponent.new)
+        .end();
+    final positionPool = systems.world.getPool(PositionComponent.new);
+    final renderPool = systems.world.getPool(RenderComponent.new);
+    final colorPool = systems.world.getPool(ColorComponent.new);
+    final namePool = systems.world.getPool(NameComponent.new);
 
-  @override
-  void execute(delta) {
-    query.entities.forEach((entity) {
-      final position = entity.get<PositionComponent>()!;
-      final key = entity.get<RenderComponent>()!.value;
-      final color = entity.get<ColorComponent>()?.value ?? Colors.white;
+    for (final entity in filter) {
+      final position = positionPool.get(entity);
+      final key = renderPool.get(entity).char ?? '';
+      var color = Colors.white;
+      if (colorPool.has(entity)) {
+        color = colorPool.get(entity).color!;
+      }
 
       terminal
         ..save()
         ..translate(position.x!, position.y!)
-        ..draw(key!, foregroundColor: color);
-      if (entity.has<NameComponent>()) {
-        final name = entity.get<NameComponent>()!.value!;
+        ..draw(key, foregroundColor: color);
+
+      if (namePool.has(entity)) {
+        final name = namePool.get(entity).name!;
         terminal
           ..translate(-(name.length ~/ 2), 1)
           ..draw(name);
       }
       terminal.restore();
-    });
+    }
 
-    terminal.draw('delta: $delta', foregroundColor: Colors.green);
+    terminal.draw('delta: $dt', foregroundColor: Colors.green);
     terminal.draw(
-      'entites: ${world!.entities.length}',
+      'entites: ${systems.world.entitiesCount}',
       foregroundColor: Colors.green,
-      position: Vector2(0, 1),
+      position: const Vector2(0, 1),
     );
     terminal.draw(
       ' W A S D | Move Tim\n'

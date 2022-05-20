@@ -2,11 +2,11 @@ name: example
 description: A simple Oxygen example.
 
 environment:
-  sdk: '>=2.12.0 <3.0.0'
+  sdk: '>=2.16.0 <3.0.0'
 
 dependencies:
  oxygen:
   path: ../
 
 dev_dependencies:
-  pedantic: ^1.11.0
+  flame_lint: ^0.0.1
