@@ -85,7 +85,7 @@ class EntityManager {
 
     entity._componentTypes.add(T);
     entity._components[T] = component;
-    _queryManager._onComponentAddedToEntity(entity, T);
+    _queryManager._onComponentOfEntityChanged(entity, T);
   }
 
   /// Remove and dispose a component by generics.
@@ -117,8 +117,7 @@ class EntityManager {
     entity._componentTypes.remove(componentType);
     final component = entity._components.remove(componentType);
     component?.dispose();
-
-    _queryManager._onComponentRemovedFromEntity(entity, componentType);
+    _queryManager._onComponentOfEntityChanged(entity, componentType);
   }
 
   /// Removes all the components the given entity has.

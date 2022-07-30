@@ -21,7 +21,7 @@ class QueryManager {
     }
   }
 
-  void _onComponentAddedToEntity(Entity entity, Type componentType) {
+  void _onComponentOfEntityChanged(Entity entity, Type componentType) {
     for (final query in _queries.values) {
       // Entity should only be added when all the following conditions are met:
       // - the Entity matches the complete query.
@@ -29,11 +29,7 @@ class QueryManager {
       if (query.match(entity) && !query._entities.contains(entity)) {
         query._entities.add(entity);
       }
-    }
-  }
 
-  void _onComponentRemovedFromEntity(Entity entity, Type componentType) {
-    for (final query in _queries.values) {
       // Entity should only be removed when all the following conditions are met:
       // - the Entity matches the complete query.
       // - the Entity is not already part of the query.
