@@ -113,11 +113,10 @@ class EntityManager {
     if (!entity._componentTypes.contains(componentType)) {
       return;
     }
-
+    entity._componentsToRemove.remove(componentType);
     entity._componentTypes.remove(componentType);
     final component = entity._components.remove(componentType);
     component?.dispose();
-
     _queryManager._onComponentRemovedFromEntity(entity, componentType);
   }
 
@@ -155,6 +154,20 @@ class EntityManager {
     _entitiesToRemove.clear();
   }
 
+  void processRemovedComponents() {
+    // Make a copy so we can update this set while looping over it.
+    _entitiesWithRemovedComponents.forEach(_releaseComponentsFromEntity);
+    _entitiesWithRemovedComponents.clear();
+  }
+
+  /// Fully release and reset an component.
+  void _releaseComponentsFromEntity(Entity entity) {
+    // Make a copy so we can update this set while looping over it.
+    final components = entity._componentsToRemove.toList();
+    components
+        .forEach((component) => _removeComponentFromEntity(entity, component));
+  }
+
   /// Fully release and reset an entity.
   void _releaseEntity(Entity entity) {
     _removeAllComponentFromEntity(entity);
@@ -164,6 +177,8 @@ class EntityManager {
     if (_entitiesByName.containsKey(entity.name)) {
       _entitiesByName.remove(entity.name);
     }
-    entity._pool?.release(entity);
+    entity.dispose();
+    //TODO: Why?
+    //entity._pool?.release(entity);
   }
 }

@@ -63,5 +63,6 @@ class World {
   void execute(double delta) {
     systemManager._execute(delta);
     entityManager.processRemovedEntities();
+    entityManager.processRemovedComponents();
   }
 }
