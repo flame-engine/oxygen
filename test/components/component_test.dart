@@ -37,7 +37,7 @@ void main() {
   group('Component', () {
     test('Components should be added and removed from entities.', () {
       final world = World();
-      world.registerComponent<TestComponent, void>(() => TestComponent());
+      world.registerComponent<TestComponent, void>(TestComponent.new);
       world.registerSystem(ComponentRemoverSystem());
       world.registerSystem(ComponentAdderSystem());
       var testEntity = world.createEntity('Test Entity');
