@@ -13,7 +13,7 @@ class Query {
   final List<Entity> _entities = [];
 
   /// Entities that are found through [_filters].
-  List<Entity> get entities => UnmodifiableListView(_entities);
+  List<Entity> get entities => List.unmodifiable(_entities);
 
   Query(this.entityManager, this._filters) : assert(_filters.isNotEmpty) {
     for (final entity in entityManager._entities) {
