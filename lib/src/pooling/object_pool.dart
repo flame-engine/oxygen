@@ -31,10 +31,6 @@ abstract class ObjectPool<T extends PoolObject<V>, V> {
       expand((_count * 0.2).floor() + 1);
     }
     final object = _pool.removeLast();
-    assert(
-      data == null,
-      '$T expects an instance of $V but received null',
-    );
     return object..init(data);
   }
 
