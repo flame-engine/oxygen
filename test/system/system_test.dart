@@ -42,23 +42,48 @@ class SystemD extends System {
 
 void main() {
   group('System', () {
-    test('Priority should be in the right order', () {
-      final systemA = SystemA();
-      final systemB = SystemB();
-      final systemC = SystemC();
-      final systemD = SystemD();
+    group('registerSystem', () {
+      test('Priority should be in the right order', () {
+        final systemA = SystemA();
+        final systemB = SystemB();
+        final systemC = SystemC();
+        final systemD = SystemD();
 
-      final world = World()
-        ..registerSystem(systemA)
-        ..registerSystem(systemB)
-        ..registerSystem(systemC)
-        ..registerSystem(systemD)
-        ..init();
+        final world = World()
+          ..registerSystem(systemA)
+          ..registerSystem(systemB)
+          ..registerSystem(systemC)
+          ..registerSystem(systemD)
+          ..init();
 
-      expect(
-        world.systemManager.systems,
-        equals([systemC, systemB, systemD, systemA]),
-      );
+        expect(
+          world.systemManager.systems,
+          equals([systemC, systemB, systemD, systemA]),
+        );
+      });
+
+      test('Should not be added if the system type is already registered', () {
+        final world = World()
+          ..registerSystem(SystemA())
+          ..registerSystem(SystemA())
+          ..registerSystem(SystemA())
+          ..registerSystem(SystemA())
+          ..init();
+
+        expect(world.systemManager.systems, hasLength(1));
+      });
+
+      test(
+          'The "system.world == null assertion" should occur when adding a '
+          'system with an initialized world', () {
+        final system = SystemA();
+        final world = World()..registerSystem(system);
+
+        expect(
+          () => world.registerSystem(system),
+          throwsA(isA<AssertionError>()),
+        );
+      });
     });
   });
 }
