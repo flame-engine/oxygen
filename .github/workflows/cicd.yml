@@ -3,7 +3,7 @@ name: cicd
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     types: [opened, reopened, synchronize]
 
@@ -14,9 +14,9 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - uses: cedx/setup-dart@v2
-      - run: pub get
-      - run: dartdoc --no-auto-include-dependencies --quiet
-      
+      - run: dart pub get
+      - run: dart pub run dartdoc --no-auto-include-dependencies --quiet
+
   format: 
     runs-on: ubuntu-latest
     steps:
@@ -30,7 +30,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - uses: cedx/setup-dart@v2
-      - run: pub get
+      - run: dart pub get
       - run: dart analyze --fatal-infos --fatal-warnings
   # END LINTING STAGE
 
@@ -41,15 +41,15 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - uses: cedx/setup-dart@v2
-      - run: pub get
+      - run: dart pub get
       - run: dart test
-  
+
   benchmark:
     needs: [test]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v1
       - uses: cedx/setup-dart@v2
-      - run: pub get
-      - run: pub run benchmark
+      - run: dart pub get
+      - run: dart pub run benchmark
   # END TESTING STAGE

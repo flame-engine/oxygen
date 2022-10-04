@@ -22,8 +22,13 @@ class SystemManager {
   }
 
   /// Register a system.
+  ///
+  /// If a given system type has already been added, it will simply return.
   void registerSystem<T extends System>(T system) {
     assert(system.world == null, '$T is already registered');
+    if (_systemsByType.containsKey(system.runtimeType)) {
+      return;
+    }
     system.world = world;
     _systems.add(system);
     _systemsByType[T] = system;
