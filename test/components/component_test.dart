@@ -43,16 +43,29 @@ void main() {
       var testEntity = world.createEntity('Test Entity');
       world.init();
 
-      expect(false, testEntity.has<TestComponent>(),
-          reason: 'Entity has component it shouldnt.');
+      expect(
+        false,
+        testEntity.has<TestComponent>(),
+        reason: 'Entity has component it shouldnt.',
+      );
+
       world.execute(1);
+
       testEntity = world.entities.first;
-      expect(true, testEntity.has<TestComponent>(),
-          reason: 'Entity does not have required component.');
+      expect(
+        true,
+        testEntity.has<TestComponent>(),
+        reason: 'Entity does not have required component.',
+      );
+
       world.execute(1);
+
       testEntity = world.entities.first;
-      expect(false, testEntity.has<TestComponent>(),
-          reason: 'Entity has component it shouldnt.');
+      expect(
+        false,
+        testEntity.has<TestComponent>(),
+        reason: 'Entity has component it shouldnt.',
+      );
     });
   });
 }

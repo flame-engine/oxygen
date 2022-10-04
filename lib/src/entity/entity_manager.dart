@@ -154,8 +154,8 @@ class EntityManager {
     _entitiesToRemove.clear();
   }
 
+  /// Process all removed components from the last execute cycle.
   void processRemovedComponents() {
-    // Make a copy so we can update this set while looping over it.
     _entitiesWithRemovedComponents.forEach(_releaseComponentsFromEntity);
     _entitiesWithRemovedComponents.clear();
   }
@@ -177,8 +177,6 @@ class EntityManager {
     if (_entitiesByName.containsKey(entity.name)) {
       _entitiesByName.remove(entity.name);
     }
-    entity.dispose();
-    //TODO: Why?
-    //entity._pool?.release(entity);
+    entity._pool?.release(entity);
   }
 }
