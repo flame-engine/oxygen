@@ -19,7 +19,7 @@ Oxygen is a lightweight Entity Component System framework written in Dart, with 
 
 ## Goals
 
-Oxygen is heavily inspired by [ECSY](https://ecsy.io/), and because of that it shares the same design principals. The main goal for Oxygen is to be lightweight, performant and simple to use. With APIs that try and help you make good use of the ECS design pattern, without restricting you in building your logic.
+Oxygen is heavily inspired by [ECSY](https://ecsyjs.github.io/ecsy/), and because of that it shares the same design principals. The main goal for Oxygen is to be lightweight, performant and simple to use. With APIs that try and help you make good use of the ECS design pattern, without restricting you in building your logic.
 
 ## Documentation
 
@@ -30,4 +30,4 @@ See the [documentation](https://github.com/flame-engine/oxygen/blob/master/doc) 
 For contributing see our [Contributing guidelines](https://github.com/flame-engine/oxygen/blob/master/CONTRIBUTING.md). Please read this carefully as it will answer most of your contributing-related questions.
 
 ## Credits
-- Inspired by [ecsy](https://ecsy.io/)
+- Inspired by [ecsy](https://ecsyjs.github.io/ecsy/)
