@@ -85,7 +85,7 @@ class EntityManager {
 
     entity._componentTypes.add(T);
     entity._components[T] = component;
-    _queryManager._onComponentAddedToEntity(entity, T);
+    _queryManager._onComponentOfEntityChanged(entity, T);
   }
 
   /// Remove and dispose a component by generics.
@@ -113,12 +113,11 @@ class EntityManager {
     if (!entity._componentTypes.contains(componentType)) {
       return;
     }
-
+    entity._componentsToRemove.remove(componentType);
     entity._componentTypes.remove(componentType);
     final component = entity._components.remove(componentType);
     component?.dispose();
-
-    _queryManager._onComponentRemovedFromEntity(entity, componentType);
+    _queryManager._onComponentOfEntityChanged(entity, componentType);
   }
 
   /// Removes all the components the given entity has.
@@ -153,6 +152,20 @@ class EntityManager {
   void processRemovedEntities() {
     _entitiesToRemove.forEach(_releaseEntity);
     _entitiesToRemove.clear();
+  }
+
+  /// Process all removed components from the last execute cycle.
+  void processRemovedComponents() {
+    _entitiesWithRemovedComponents.forEach(_releaseComponentsFromEntity);
+    _entitiesWithRemovedComponents.clear();
+  }
+
+  /// Fully release and reset an component.
+  void _releaseComponentsFromEntity(Entity entity) {
+    // Make a copy so we can update this set while looping over it.
+    final components = entity._componentsToRemove.toList();
+    components
+        .forEach((component) => _removeComponentFromEntity(entity, component));
   }
 
   /// Fully release and reset an entity.
