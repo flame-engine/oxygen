@@ -12,15 +12,15 @@ jobs:
   dartdoc: 
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
       - uses: dart-lang/setup-dart@v1
       - run: dart pub get
-      - run: dart pub run dartdoc --no-auto-include-dependencies --quiet
+      - run: dart run dartdoc --no-auto-include-dependencies --quiet
 
   format: 
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
       - uses: dart-lang/setup-dart@v1
       - run: |
           [ -z "$(dart format . | grep "(0 changed)")" ] && exit 1 || exit 0
@@ -28,7 +28,7 @@ jobs:
   analyze: 
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
       - uses: dart-lang/setup-dart@v1
       - run: dart pub get
       - run: dart analyze --fatal-infos --fatal-warnings
@@ -39,7 +39,7 @@ jobs:
     needs: [dartdoc, format, analyze]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
       - uses: dart-lang/setup-dart@v1
       - run: dart pub get
       - run: dart test
@@ -48,8 +48,8 @@ jobs:
     needs: [test]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v3
       - uses: dart-lang/setup-dart@v1
       - run: dart pub get
-      - run: dart pub run benchmark
+      - run: dart run benchmark
   # END TESTING STAGE
