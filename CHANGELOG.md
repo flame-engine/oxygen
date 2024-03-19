@@ -1,3 +1,7 @@
+## 0.3.1
+- Component removal and HasNot fix
+- Fix so that systems can't be added twice
+
 ## 0.3.0
 - Fixed component removal so that it actually removes components
 - Fixed `HasNot` filters to properly filter after a filtered component is added
